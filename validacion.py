@@ -7,17 +7,22 @@ from sklearn.model_selection import cross_val_predict, cross_val_score, train_te
 
 def validar(pipeline, X, y, cv):
     """Validación cruzada: devuelve la media y la desviación de la exactitud."""
-    # TODO 4 (en clase): cross_val_score → media y desviación
-    raise NotImplementedError("TODO 4: completar en clase")
+    puntajes = cross_val_score(clone(pipeline), X, y, cv=cv, scoring="accuracy")  # una exactitud por pliegue
+    return puntajes.mean(), puntajes.std()
 
 
 def proporcion_malos_detectados(pipeline, X, y, cv):
     """De todos los créditos malos, ¿qué proporción marca el modelo como malos?"""
-    # TODO 5 (en clase): cross_val_predict + recall_score
-    raise NotImplementedError("TODO 5: completar en clase")
+    pred = cross_val_predict(clone(pipeline), X, y, cv=cv)    # cada predicción la hace un modelo que no vio esa fila
+    return recall_score(y, pred, pos_label=1)                 # 1 = crédito malo
 
 
 def particion_unica(pipeline, X, y, semillas=range(10)):
     """Repite una partición 75/25 con varias semillas y devuelve la exactitud de cada una."""
-    # TODO 6 (en clase): bucle con train_test_split y varias semillas
-    raise NotImplementedError("TODO 6: completar en clase")
+    exactitudes = []
+    for semilla in semillas:
+        X_ent, X_val, y_ent, y_val = train_test_split(
+            X, y, test_size=0.25, stratify=y, random_state=semilla)   # 750 / 250, misma proporción de malos
+        modelo = clone(pipeline).fit(X_ent, y_ent)                    # copia limpia en cada repetición
+        exactitudes.append(modelo.score(X_val, y_val))
+    return np.array(exactitudes)

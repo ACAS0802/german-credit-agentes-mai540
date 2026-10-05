@@ -8,11 +8,18 @@ from sklearn.tree import DecisionTreeClassifier        # el árbol de decisión:
 
 def crear_pipeline(modelo, cols_cat):
     """Envuelve un modelo con su preparación de datos."""
-    # TODO 2 (en clase): OrdinalEncoder + ColumnTransformer + Pipeline
-    raise NotImplementedError("TODO 2: completar en clase")
+    codificador = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)  # categoría no vista en entrenamiento → -1
+    prep = ColumnTransformer(
+        [("cat", codificador, cols_cat)],                  # solo las columnas de texto se codifican
+        remainder="passthrough",                           # las 7 numéricas pasan tal cual (los árboles no necesitan escalado)
+    )
+    return Pipeline([("prep", prep), ("modelo", modelo)])  # 'prep' se ajusta solo con los datos de entrenamiento de cada pliegue
 
 
 def tres_modelos():
     """Los tres modelos que comparamos, con semilla fija."""
-    # TODO 3 (en clase): diccionario con Árbol, Random Forest y Boosting
-    raise NotImplementedError("TODO 3: completar en clase")
+    return {
+        "Árbol": DecisionTreeClassifier(random_state=42),                    # sin límite de profundidad (valores por defecto)
+        "Random Forest": RandomForestClassifier(random_state=42),            # 100 árboles por defecto
+        "Boosting": HistGradientBoostingClassifier(random_state=42),         # valores por defecto
+    }

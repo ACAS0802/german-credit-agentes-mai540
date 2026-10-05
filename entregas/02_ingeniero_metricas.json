@@ -1,0 +1,91 @@
+{
+  "configuracion": {
+    "validacion_cruzada": "StratifiedKFold(n_splits=5, shuffle=True, random_state=42) de datos.py",
+    "particion_unica": "train_test_split(test_size=0.25, stratify=y, random_state=s), s=0..9",
+    "preprocesamiento": "ColumnTransformer: OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1) en 13 categóricas; 7 numéricas passthrough",
+    "random_state_modelos": 42,
+    "clase_positiva": "bad (y=1)",
+    "referencia_siempre_bueno": 0.7,
+    "sklearn_version": "1.8.0"
+  },
+  "modelos": {
+    "Árbol": {
+      "modelo": "DecisionTreeClassifier(random_state=42)",
+      "cv_exactitud_media": 0.698,
+      "cv_exactitud_desviacion": 0.0169,
+      "recall_bad_cross_val_predict": 0.53,
+      "particion_unica": {
+        "semillas": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "exactitudes": [
+          0.608,
+          0.66,
+          0.664,
+          0.672,
+          0.704,
+          0.688,
+          0.664,
+          0.696,
+          0.668,
+          0.72
+        ],
+        "minimo": 0.608,
+        "maximo": 0.72,
+        "rango": 0.112,
+        "media": 0.6744,
+        "media_menos_cv": -0.0236,
+        "minimo_menos_cv": -0.09,
+        "maximo_menos_cv": 0.022
+      }
+    },
+    "Random Forest": {
+      "modelo": "RandomForestClassifier(random_state=42)",
+      "cv_exactitud_media": 0.759,
+      "cv_exactitud_desviacion": 0.0058,
+      "recall_bad_cross_val_predict": 0.3767,
+      "particion_unica": {
+        "semillas": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "exactitudes": [
+          0.732,
+          0.756,
+          0.732,
+          0.776,
+          0.712,
+          0.752,
+          0.796,
+          0.784,
+          0.724,
+          0.768
+        ],
+        "minimo": 0.712,
+        "maximo": 0.796,
+        "rango": 0.084,
+        "media": 0.7532,
+        "media_menos_cv": -0.0058,
+        "minimo_menos_cv": -0.047,
+        "maximo_menos_cv": 0.037
+      }
+    }
+  }
+}
