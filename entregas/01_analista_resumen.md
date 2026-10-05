@@ -6,7 +6,7 @@ Todos los números salen de ejecutar `cargar_datos()` sobre `datos/credit_g.csv`
 ## Forma y objetivo
 - `X`: **1000 filas × 20 columnas**; `y` = 1 si `clase == "bad"`.
 - Malos: **300 (0.30)**; buenos: 700 (0.70).
-- **Referencia «siempre bueno»: exactitud 0.70** y detecta 0.00 de los malos. Un modelo con exactitud ≤ 0.70 no aporta nada.
+- **Referencia «siempre bueno»: exactitud 0.70** y detecta 0.00 de los malos. Un modelo con exactitud ≤ 0.70 no mejora la exactitud de la referencia; hay que mirar también la proporción de malos detectados.
 
 ## Columnas
 - **13 categóricas** (texto): checking_status (4 cat.), credit_history (5), purpose (10), savings_status (5),
@@ -32,3 +32,6 @@ cada uno con proporción de malos 0.30.
    - housing: own 0.261 (713), rent 0.391 (179), for free 0.407 (108).
    - personal_status: male single 0.266 (548), female div/dep/mar 0.352 (310), male mar/wid 0.272 (92), male div/sep 0.400 (50).
    - foreign_worker: yes 0.307 (963), no 0.108 (37). Grupos de n < 100 darán exactitudes inestables.
+
+---
+Corrección (hallazgo H4 del auditor): cambié «no aporta nada» por «no mejora la exactitud de la referencia», porque un modelo con exactitud ≤ 0.70 puede detectar malos (el árbol, 0.698, detecta el 53 %).
