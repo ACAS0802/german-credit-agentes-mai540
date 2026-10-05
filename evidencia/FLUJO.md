@@ -44,8 +44,10 @@ La ronda 2 (correcciones y nueva auditoría) no reportó su costo y no está inc
 Para comparar, un agente aparte hizo toda la tarea en una sola conversación sobre una copia limpia del
 proyecto base (`linea_base_un_agente/`). Obtuvo **exactamente los mismos números** (árbol 0.698 ± 0.017,
 detecta 0.530; RF 0.759 ± 0.006, detecta 0.377; particiones 0.608-0.720 y 0.712-0.796) y su
-autoverificación dio «Correcto» en fuga, etiqueta y reproducibilidad. Pero su texto repite los problemas
-que el auditor sí marcó en el flujo distribuido: afirma que el árbol «no supera la referencia» con 0.698
-frente a 0.700 sin revisar la semilla (H3), contrasta una desviación de 0.006 con «±4 puntos» de las
-particiones (H1) y no dice que la comparación del recall depende del umbral (H2). Su autoverificación
-solo revisó lo que ya sabía revisar.
+autoverificación dio «Correcto» en fuga, etiqueta y reproducibilidad. En su texto, una afirmación
+tiene el mismo problema que el auditor marcó como H1: contrasta la desviación entre pliegues (0.006) con
+«±4 puntos» de las particiones, es decir, dos estadísticos distintos. Otra queda a medias frente a H2:
+menciona el umbral 0.5, pero no comprueba que con 0.4 el Random Forest supera al árbol en las dos métricas.
+Su conclusión sobre el árbol frente a 0.70 resultó correcta (el auditor la confirmó con 20 semillas), pero
+el agente no la comprobó. Su autoverificación solo revisó fuga, etiqueta y reproducibilidad: las tres
+cosas que ya sabía que tenía que revisar, y ninguna sobre la interpretación.
