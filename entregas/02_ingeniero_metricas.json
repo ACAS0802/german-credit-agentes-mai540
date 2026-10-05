@@ -6,6 +6,8 @@
     "random_state_modelos": 42,
     "clase_positiva": "bad (y=1)",
     "referencia_siempre_bueno": 0.7,
+    "desviaciones": "ddof=0 = numpy.std poblacional (validar()); ddof=1 = muestral",
+    "notas_sensibilidad": "sensibilidad_umbral y sensibilidad_semilla_cv son descriptivas; no se usaron para elegir umbral ni esquema",
     "sklearn_version": "1.8.0"
   },
   "modelos": {
@@ -13,7 +15,25 @@
       "modelo": "DecisionTreeClassifier(random_state=42)",
       "cv_exactitud_media": 0.698,
       "cv_exactitud_desviacion": 0.0169,
+      "cv_exactitud_desviacion_ddof": 0,
+      "cv_pliegues": {
+        "valores": [
+          0.71,
+          0.71,
+          0.665,
+          0.705,
+          0.7
+        ],
+        "minimo": 0.665,
+        "maximo": 0.71,
+        "rango": 0.045,
+        "media": 0.698,
+        "desviacion_ddof0": 0.0169,
+        "desviacion_ddof1": 0.0189
+      },
       "recall_bad_cross_val_predict": 0.53,
+      "recall_bad_umbral": "predict() del modelo (argmax de probabilidades; empate 0.5 → good)",
+      "proporcion_predicha_bad": 0.32,
       "particion_unica": {
         "semillas": [
           0,
@@ -27,7 +47,8 @@
           8,
           9
         ],
-        "exactitudes": [
+        "estratificada": true,
+        "valores": [
           0.608,
           0.66,
           0.664,
@@ -43,16 +64,146 @@
         "maximo": 0.72,
         "rango": 0.112,
         "media": 0.6744,
+        "desviacion_ddof0": 0.0291,
+        "desviacion_ddof1": 0.0307,
         "media_menos_cv": -0.0236,
         "minimo_menos_cv": -0.09,
         "maximo_menos_cv": 0.022
+      },
+      "comparacion_homogenea": {
+        "rango_particion_unica": 0.112,
+        "rango_pliegues_cv": 0.045,
+        "desviacion_ddof1_particion_unica": 0.0307,
+        "desviacion_ddof1_pliegues_cv": 0.0189
+      },
+      "sensibilidad_umbral_descriptiva": {
+        "proba>=0.3": {
+          "recall_bad": 0.53,
+          "exactitud": 0.698,
+          "proporcion_predicha_bad": 0.32
+        },
+        "proba>=0.4": {
+          "recall_bad": 0.53,
+          "exactitud": 0.698,
+          "proporcion_predicha_bad": 0.32
+        },
+        "proba>=0.5": {
+          "recall_bad": 0.53,
+          "exactitud": 0.698,
+          "proporcion_predicha_bad": 0.32
+        }
+      },
+      "sensibilidad_semilla_cv": {
+        "semillas": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "medias": [
+          0.687,
+          0.649,
+          0.661,
+          0.669,
+          0.673,
+          0.687,
+          0.677,
+          0.674,
+          0.704,
+          0.691,
+          0.691,
+          0.712,
+          0.654,
+          0.674,
+          0.663,
+          0.679,
+          0.669,
+          0.679,
+          0.677,
+          0.676
+        ],
+        "minimo": 0.649,
+        "maximo": 0.712,
+        "promedio": 0.6773,
+        "n_semillas_media_mayor_0.70": 2,
+        "media_particion_unica_menos_promedio_cv": -0.0029
+      },
+      "particion_unica_no_estratificada": {
+        "semillas": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "estratificada": false,
+        "valores": [
+          0.68,
+          0.704,
+          0.716,
+          0.676,
+          0.692,
+          0.616,
+          0.64,
+          0.668,
+          0.744,
+          0.692
+        ],
+        "minimo": 0.616,
+        "maximo": 0.744,
+        "rango": 0.128,
+        "media": 0.6828,
+        "desviacion_ddof0": 0.0347,
+        "desviacion_ddof1": 0.0366,
+        "media_menos_cv": -0.0152,
+        "minimo_menos_cv": -0.082,
+        "maximo_menos_cv": 0.046
       }
     },
     "Random Forest": {
       "modelo": "RandomForestClassifier(random_state=42)",
       "cv_exactitud_media": 0.759,
       "cv_exactitud_desviacion": 0.0058,
+      "cv_exactitud_desviacion_ddof": 0,
+      "cv_pliegues": {
+        "valores": [
+          0.765,
+          0.765,
+          0.75,
+          0.76,
+          0.755
+        ],
+        "minimo": 0.75,
+        "maximo": 0.765,
+        "rango": 0.015,
+        "media": 0.759,
+        "desviacion_ddof0": 0.0058,
+        "desviacion_ddof1": 0.0065
+      },
       "recall_bad_cross_val_predict": 0.3767,
+      "recall_bad_umbral": "predict() del modelo (argmax de probabilidades; empate 0.5 → good)",
+      "proporcion_predicha_bad": 0.167,
       "particion_unica": {
         "semillas": [
           0,
@@ -66,7 +217,8 @@
           8,
           9
         ],
-        "exactitudes": [
+        "estratificada": true,
+        "valores": [
           0.732,
           0.756,
           0.732,
@@ -82,9 +234,121 @@
         "maximo": 0.796,
         "rango": 0.084,
         "media": 0.7532,
+        "desviacion_ddof0": 0.0264,
+        "desviacion_ddof1": 0.0278,
         "media_menos_cv": -0.0058,
         "minimo_menos_cv": -0.047,
         "maximo_menos_cv": 0.037
+      },
+      "comparacion_homogenea": {
+        "rango_particion_unica": 0.084,
+        "rango_pliegues_cv": 0.015,
+        "desviacion_ddof1_particion_unica": 0.0278,
+        "desviacion_ddof1_pliegues_cv": 0.0065
+      },
+      "sensibilidad_umbral_descriptiva": {
+        "proba>=0.3": {
+          "recall_bad": 0.8,
+          "exactitud": 0.686,
+          "proporcion_predicha_bad": 0.494
+        },
+        "proba>=0.4": {
+          "recall_bad": 0.6033,
+          "exactitud": 0.737,
+          "proporcion_predicha_bad": 0.325
+        },
+        "proba>=0.5": {
+          "recall_bad": 0.4033,
+          "exactitud": 0.763,
+          "proporcion_predicha_bad": 0.179
+        }
+      },
+      "sensibilidad_semilla_cv": {
+        "semillas": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "medias": [
+          0.764,
+          0.762,
+          0.749,
+          0.749,
+          0.774,
+          0.755,
+          0.755,
+          0.756,
+          0.756,
+          0.773,
+          0.745,
+          0.748,
+          0.741,
+          0.739,
+          0.751,
+          0.758,
+          0.753,
+          0.766,
+          0.762,
+          0.758
+        ],
+        "minimo": 0.739,
+        "maximo": 0.774,
+        "promedio": 0.7557,
+        "n_semillas_media_mayor_0.70": 20,
+        "media_particion_unica_menos_promedio_cv": -0.0025
+      },
+      "particion_unica_no_estratificada": {
+        "semillas": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "estratificada": false,
+        "valores": [
+          0.752,
+          0.74,
+          0.736,
+          0.728,
+          0.728,
+          0.728,
+          0.724,
+          0.792,
+          0.772,
+          0.772
+        ],
+        "minimo": 0.724,
+        "maximo": 0.792,
+        "rango": 0.068,
+        "media": 0.7472,
+        "desviacion_ddof0": 0.0225,
+        "desviacion_ddof1": 0.0238,
+        "media_menos_cv": -0.0118,
+        "minimo_menos_cv": -0.035,
+        "maximo_menos_cv": 0.033
       }
     }
   }
