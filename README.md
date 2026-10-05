@@ -1,4 +1,41 @@
-# Demo Clase 6 · Evaluación de modelos con German Credit
+# Flujo de Trabajo con Agentes Especializados — Tarea 6.1 (MAI 540)
+
+**Araceli Castillo** · MAI 540: Machine Learning · Prof. Kevin A. García Gallardo · Atlantis University · Octubre de 2026
+
+Evaluación de un árbol de decisión y un Random Forest sobre German Credit (1,000 solicitudes, 30 % «bad»),
+repartiendo el trabajo entre tres roles que se ejecutaron como agentes separados.
+
+| Dónde | Qué |
+|---|---|
+| `.claude/agents/` | Los tres roles: `analista-datos.md`, `ingeniero-modelos.md`, `auditor.md` |
+| `entregas/` | Lo que entregó cada rol, en orden (01 analista, 02 ingeniero, 03 auditor y su ronda 2) |
+| `evidencia/FLUJO.md` | Cadena de entregas con su commit, hallazgos, costo de cada agente y línea base de un solo agente |
+| `experimentos.py` | Validación cruzada, partición única y comprobaciones pedidas por el auditor |
+| `MAI540_Tarea6.1_Informe_Araceli_Castillo.pdf` | Informe APA |
+
+**Reproducir** (Python 3.10+, semillas documentadas):
+
+```bash
+pip install -r requirements.txt
+python datos.py          # forma de X, proporción de malos, columnas categóricas
+python experimentos.py   # escribe entregas/02_ingeniero_metricas.json
+```
+
+**Resultados** (validación cruzada estratificada de 5 pliegues, `random_state=42`):
+
+| Modelo | Exactitud (media ± desv., ddof=1) | Malos detectados | Partición única 75/25, semillas 0-9 |
+|---|---|---|---|
+| Árbol de decisión | 0.698 ± 0.019 | 0.530 | 0.608 – 0.720 (rango 0.112) |
+| Random Forest | 0.759 ± 0.007 | 0.377 | 0.712 – 0.796 (rango 0.084) |
+
+`main.py` aún no corre completo: los TODO 7 a 12 (curvas, búsqueda, auditoría por subgrupo y pruebas)
+quedan para la Tarea 6.2, que parte de este diagnóstico.
+
+---
+
+*Lo que sigue es el README original del proyecto base del profesor.*
+
+## Demo Clase 6 · Evaluación de modelos con German Credit
 
 Proyecto que se programa en vivo en la Clase 6. Evalúa tres modelos (árbol, Random Forest y boosting)
 sobre 1,000 solicitudes de crédito: validación cruzada, curva de aprendizaje, búsqueda de hiperparámetros,
