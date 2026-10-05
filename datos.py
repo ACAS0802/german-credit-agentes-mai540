@@ -5,8 +5,12 @@ from sklearn.model_selection import StratifiedKFold    # StratifiedKFold: repart
 
 def cargar_datos(ruta="datos/credit_g.csv"):
     """Devuelve X (variables), y (objetivo), cols_cat (columnas con texto) y cv (el esquema de validación)."""
-    # TODO 1 (en clase): leer el CSV, separar y/X, detectar columnas categóricas y crear cv
-    raise NotImplementedError("TODO 1: completar en clase")
+    df = pd.read_csv(ruta)                                            # 1,000 filas: 20 variables + la columna 'clase'
+    y = (df["clase"] == "bad").astype(int)                            # clase positiva: 1 = crédito malo
+    X = df.drop(columns="clase")                                      # todo lo demás son variables
+    cols_cat = X.select_dtypes(exclude="number").columns.tolist()    # columnas de texto (se codifican dentro del pipeline)
+    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)   # 5 pliegues con la misma proporción de malos
+    return X, y, cols_cat, cv
 
 
 if __name__ == "__main__":
