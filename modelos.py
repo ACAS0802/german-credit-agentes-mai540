@@ -23,3 +23,10 @@ def tres_modelos():
         "Random Forest": RandomForestClassifier(random_state=42),            # 100 árboles por defecto
         "Boosting": HistGradientBoostingClassifier(random_state=42),         # valores por defecto
     }
+
+
+def modelo_elegido():
+    """Modelo recomendado en la Tarea 6.2: boosting con pesos de clase balanceados.
+    Aprobar un crédito malo cuesta más que rechazar uno bueno; con class_weight='balanced'
+    cada error sobre un «bad» pesa más al entrenar (ver optimizacion.py y el informe)."""
+    return HistGradientBoostingClassifier(class_weight="balanced", random_state=42)
