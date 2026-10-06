@@ -1,0 +1,5 @@
+grupo,casos,exactitud,prop_malos,malos_detectados
+female div/dep/mar,310,0.729,0.3516,0.578
+male div/sep,50,0.68,0.4,0.6
+male mar/wid,92,0.6739,0.2717,0.4
+male single,548,0.7737,0.2664,0.5411
