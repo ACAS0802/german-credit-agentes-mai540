@@ -1,4 +1,4 @@
-# Flujo de Trabajo con Agentes Especializados — Tarea 6.1 (MAI 540)
+# German Credit: agentes especializados, optimización y auditoría — Tareas 6.1 y 6.2 (MAI 540)
 
 **Araceli Castillo** · MAI 540: Machine Learning · Prof. Kevin A. García Gallardo · Atlantis University · Octubre de 2026
 
@@ -28,8 +28,28 @@ python experimentos.py   # escribe entregas/02_ingeniero_metricas.json
 | Árbol de decisión | 0.698 ± 0.019 | 0.530 | 0.608 – 0.720 (rango 0.112) |
 | Random Forest | 0.759 ± 0.007 | 0.377 | 0.712 – 0.796 (rango 0.084) |
 
-`main.py` aún no corre completo: los TODO 7 a 12 (curvas, búsqueda, auditoría por subgrupo y pruebas)
-quedan para la Tarea 6.2, que parte de este diagnóstico.
+Los TODO 7 a 12 se completaron en la Tarea 6.2.
+
+## Tarea 6.2 — Optimización y auditoría del modelo
+
+| Dónde | Qué |
+|---|---|
+| `optimizacion.py` | Búsqueda, CV anidada, comparación de tres modelos, curvas y subgrupos (`python optimizacion.py`, unos 7 min) |
+| `resultados/` | `optimizacion.json`, tabla de la búsqueda, subgrupos y salida de pytest |
+| `figs/curvas_6_1_vs_6_2.png` | Curva del diagnóstico de la 6.1 frente a la del modelo elegido |
+| `.claude/skills/auditoria-modelos/` | Skill v5 de las Tareas 4.1 y 4.2, sin cambios |
+| `auditoria/AUDIT_REPORT.md`, `AUDIT_REPORT_despues.md` | La Skill antes (19/5/1) y después (20/4/1) de corregir |
+| `tests/test_modelo.py` | `pytest -v`: 7 aprobadas y 1 fallo esperado |
+| `MAI540_Tarea6.2_Informe_Araceli_Castillo.pdf`, `BITACORA_Tarea6.2_…pdf` | Informe APA y bitácora |
+
+**Recomendación:** boosting con pesos de clase balanceados, sin edad, estado civil ni trabajador
+extranjero como entradas. Exactitud 0.752 ± 0.031, detecta 60 % de los créditos malos, costo 728
+(Random Forest: 0.764, 41 %, 944).
+
+`main.py` es el flujo de la clase y sigue usando todas las variables; los resultados de la 6.2 salen de
+`optimizacion.py`.
+
+---
 
 ---
 
