@@ -6,12 +6,22 @@ from sklearn.preprocessing import OrdinalEncoder       # OrdinalEncoder: convier
 from sklearn.tree import DecisionTreeClassifier        # el árbol de decisión: nuestro modelo individual
 
 
-def crear_pipeline(modelo, cols_cat):
-    """Envuelve un modelo con su preparación de datos."""
+# Atributos protegidos (edad, sexo/estado civil, origen nacional): se usan para auditar, no para decidir.
+# Hallazgo E4 de la auditoría de la Tarea 6.2. 'housing' no es un atributo protegido: se queda como
+# variable financiera, pero también se audita.
+VARIABLES_SENSIBLES = ("age", "personal_status", "foreign_worker")
+
+
+def crear_pipeline(modelo, cols_cat, excluir=()):
+    """Envuelve un modelo con su preparación de datos. 'excluir' son columnas que el modelo no ve
+    (la Tarea 6.1 no excluye nada; la 6.2 excluye VARIABLES_SENSIBLES)."""
     codificador = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)  # categoría no vista en entrenamiento → -1
+    pasos = [("cat", codificador, [c for c in cols_cat if c not in excluir])]  # solo las columnas de texto se codifican
+    if excluir:
+        pasos.append(("fuera", "drop", list(excluir)))     # columnas que el modelo no puede usar
     prep = ColumnTransformer(
-        [("cat", codificador, cols_cat)],                  # solo las columnas de texto se codifican
-        remainder="passthrough",                           # las 7 numéricas pasan tal cual (los árboles no necesitan escalado)
+        pasos,
+        remainder="passthrough",                           # las numéricas pasan tal cual (los árboles no necesitan escalado)
     )
     return Pipeline([("prep", prep), ("modelo", modelo)])  # 'prep' se ajusta solo con los datos de entrenamiento de cada pliegue
 
