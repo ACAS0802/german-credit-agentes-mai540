@@ -10,11 +10,15 @@ PARAM_GRID = {
 
 def buscar(pipeline, X, y, cv):
     """Prueba las 40 combinaciones con validación cruzada y devuelve la mejor y su puntaje."""
-    # TODO 8 (en clase): GridSearchCV con PARAM_GRID
-    raise NotImplementedError("TODO 8: completar en clase")
+    gs = GridSearchCV(pipeline, PARAM_GRID, cv=cv, scoring="accuracy", n_jobs=-1)
+    gs.fit(X, y)                                       # 40 combinaciones × 5 pliegues
+    return gs.best_params_, gs.best_score_             # ojo: best_score_ es optimista (eligió con esos mismos pliegues)
 
 
 def buscar_con_prueba(pipeline, X, y, cv):
     """La búsqueda usa solo el 80%; el 20% reservado se abre una sola vez al final."""
-    # TODO 9 (en clase): reservar el 20%, buscar con el 80% y evaluar una sola vez
-    raise NotImplementedError("TODO 9: completar en clase")
+    X_bus, X_res, y_bus, y_res = train_test_split(
+        X, y, test_size=0.20, stratify=y, random_state=42)  # el 20% se aparta antes de buscar
+    gs = GridSearchCV(pipeline, PARAM_GRID, cv=cv, scoring="accuracy", n_jobs=-1)
+    gs.fit(X_bus, y_bus)                               # la búsqueda solo ve el 80%
+    return gs.best_score_, gs.score(X_res, y_res)      # lo que dijo la búsqueda frente a la prueba reservada
