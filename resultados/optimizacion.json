@@ -23,61 +23,68 @@
     },
     "combinaciones": 40,
     "costo": "5 × malo aprobado + 1 × bueno rechazado",
+    "variables_excluidas_del_modelo": [
+      "age",
+      "personal_status",
+      "foreign_worker"
+    ],
+    "regla_eleccion": "menor costo entre modelos con exactitud > 0.70, confirmado en semillas 0-4",
+    "umbral_disparidad": "0.1 en malos detectados; concluyente si >= 30 malos",
     "sklearn": "1.8.0"
   },
   "busqueda": {
     "ganador": {
       "max_depth": 5,
-      "min_samples_leaf": 1
+      "min_samples_leaf": 5
     },
     "puntaje_busqueda_optimista": 0.73,
     "arbol_por_defecto": {
-      "exactitud_media": 0.698,
-      "exactitud_desv_ddof1": 0.0189,
+      "exactitud_media": 0.693,
+      "exactitud_desv_ddof1": 0.0084,
       "exactitud_pliegues": [
-        0.71,
-        0.71,
-        0.665,
-        0.705,
-        0.7
+        0.68,
+        0.695,
+        0.7,
+        0.7,
+        0.69
       ],
-      "malos_detectados": 0.53,
-      "malos_aprobados": 141,
-      "buenos_rechazados": 161,
-      "costo": 866,
-      "tiempo_ajuste_s": 0.01
+      "malos_detectados": 0.5233,
+      "malos_aprobados": 143,
+      "buenos_rechazados": 164,
+      "costo": 879,
+      "tiempo_ajuste_s": 0.011
     },
     "ganador_reevaluado_misma_cv": {
       "exactitud_media": 0.73,
       "exactitud_desv_ddof1": 0.0215,
       "exactitud_pliegues": [
-        0.765,
-        0.72,
-        0.72,
-        0.735,
-        0.71
+        0.76,
+        0.715,
+        0.73,
+        0.705,
+        0.74
       ],
-      "malos_detectados": 0.3567,
-      "malos_aprobados": 193,
-      "buenos_rechazados": 77,
-      "costo": 1042,
+      "malos_detectados": 0.32,
+      "malos_aprobados": 204,
+      "buenos_rechazados": 66,
+      "costo": 1086,
       "tiempo_ajuste_s": 0.009
     },
     "cv_anidada_numero_honesto": {
-      "exactitud_media": 0.699,
-      "exactitud_desv_ddof1": 0.0311,
+      "exactitud_media": 0.714,
+      "exactitud_desv_ddof1": 0.0286,
       "exactitud_pliegues": [
         0.745,
         0.67,
         0.705,
-        0.67,
-        0.705
+        0.73,
+        0.72
       ],
-      "malos_detectados": 0.38,
-      "malos_aprobados": 186,
-      "buenos_rechazados": 115,
-      "costo": 1045,
-      "tiempo_ajuste_s": 2.877
+      "malos_detectados": 0.3567,
+      "malos_aprobados": 193,
+      "buenos_rechazados": 93,
+      "costo": 1058,
+      "tiempo_ajuste_s": 2.62
     },
     "ganadores_por_pliegue_externo": [
       {
@@ -93,228 +100,228 @@
         "min_samples_leaf": 20
       },
       {
-        "max_depth": 7,
-        "min_samples_leaf": 20
+        "max_depth": 2,
+        "min_samples_leaf": 1
       },
       {
         "max_depth": 3,
-        "min_samples_leaf": 20
+        "min_samples_leaf": 10
       }
     ],
     "prueba_reservada_20": {
-      "busqueda_en_80": 0.725,
-      "prueba": 0.705
+      "busqueda_en_80": 0.7288,
+      "prueba": 0.725
     },
-    "optimismo_busqueda": 0.031,
-    "mejora_honesta_vs_defecto": 0.001
+    "optimismo_busqueda": 0.016,
+    "mejora_honesta_vs_defecto": 0.021
   },
   "comparacion": {
     "Árbol afinado (anidada)": {
-      "exactitud_media": 0.699,
-      "exactitud_desv_ddof1": 0.0311,
+      "exactitud_media": 0.714,
+      "exactitud_desv_ddof1": 0.0286,
       "exactitud_pliegues": [
         0.745,
         0.67,
         0.705,
-        0.67,
-        0.705
+        0.73,
+        0.72
       ],
-      "malos_detectados": 0.38,
-      "malos_aprobados": 186,
-      "buenos_rechazados": 115,
-      "costo": 1045,
-      "tiempo_ajuste_s": 2.877
+      "malos_detectados": 0.3567,
+      "malos_aprobados": 193,
+      "buenos_rechazados": 93,
+      "costo": 1058,
+      "tiempo_ajuste_s": 2.62
     },
     "Random Forest": {
-      "exactitud_media": 0.759,
-      "exactitud_desv_ddof1": 0.0065,
+      "exactitud_media": 0.764,
+      "exactitud_desv_ddof1": 0.0256,
       "exactitud_pliegues": [
-        0.765,
-        0.765,
-        0.75,
         0.76,
-        0.755
+        0.755,
+        0.735,
+        0.765,
+        0.805
       ],
-      "malos_detectados": 0.3767,
-      "malos_aprobados": 187,
-      "buenos_rechazados": 54,
-      "costo": 989,
-      "tiempo_ajuste_s": 0.153
+      "malos_detectados": 0.41,
+      "malos_aprobados": 177,
+      "buenos_rechazados": 59,
+      "costo": 944,
+      "tiempo_ajuste_s": 0.154
     },
     "Boosting": {
-      "exactitud_media": 0.752,
-      "exactitud_desv_ddof1": 0.0236,
+      "exactitud_media": 0.759,
+      "exactitud_desv_ddof1": 0.0143,
       "exactitud_pliegues": [
-        0.735,
-        0.735,
+        0.755,
         0.74,
-        0.79,
+        0.78,
+        0.76,
         0.76
       ],
       "malos_detectados": 0.49,
       "malos_aprobados": 153,
-      "buenos_rechazados": 95,
-      "costo": 860,
-      "tiempo_ajuste_s": 0.173
+      "buenos_rechazados": 88,
+      "costo": 853,
+      "tiempo_ajuste_s": 0.176
     },
     "Árbol afinado balanceado (anidada)": {
-      "exactitud_media": 0.697,
-      "exactitud_desv_ddof1": 0.046,
+      "exactitud_media": 0.688,
+      "exactitud_desv_ddof1": 0.0261,
       "exactitud_pliegues": [
-        0.73,
-        0.69,
-        0.67,
-        0.755,
-        0.64
+        0.71,
+        0.7,
+        0.665,
+        0.71,
+        0.655
       ],
-      "malos_detectados": 0.6533,
-      "malos_aprobados": 104,
-      "buenos_rechazados": 199,
-      "costo": 719,
-      "tiempo_ajuste_s": 3.001
+      "malos_detectados": 0.5933,
+      "malos_aprobados": 122,
+      "buenos_rechazados": 190,
+      "costo": 800,
+      "tiempo_ajuste_s": 2.714
     },
     "Random Forest balanceado": {
-      "exactitud_media": 0.753,
-      "exactitud_desv_ddof1": 0.0067,
+      "exactitud_media": 0.757,
+      "exactitud_desv_ddof1": 0.016,
       "exactitud_pliegues": [
-        0.75,
-        0.75,
+        0.77,
+        0.735,
+        0.765,
         0.745,
-        0.76,
-        0.76
+        0.77
       ],
-      "malos_detectados": 0.3367,
-      "malos_aprobados": 199,
-      "buenos_rechazados": 48,
-      "costo": 1043,
-      "tiempo_ajuste_s": 0.165
+      "malos_detectados": 0.3867,
+      "malos_aprobados": 184,
+      "buenos_rechazados": 59,
+      "costo": 979,
+      "tiempo_ajuste_s": 0.152
     },
     "Boosting balanceado (elegido)": {
-      "exactitud_media": 0.746,
-      "exactitud_desv_ddof1": 0.0207,
+      "exactitud_media": 0.752,
+      "exactitud_desv_ddof1": 0.0307,
       "exactitud_pliegues": [
-        0.745,
-        0.735,
+        0.775,
         0.725,
-        0.78,
-        0.745
+        0.715,
+        0.76,
+        0.785
       ],
-      "malos_detectados": 0.5467,
-      "malos_aprobados": 136,
-      "buenos_rechazados": 118,
-      "costo": 798,
-      "tiempo_ajuste_s": 0.175
+      "malos_detectados": 0.6,
+      "malos_aprobados": 120,
+      "buenos_rechazados": 128,
+      "costo": 728,
+      "tiempo_ajuste_s": 0.178
     }
   },
   "robustez_semillas_cv": {
     "0": {
       "Random Forest": {
-        "exactitud_media": 0.764,
-        "malos_detectados": 0.3933,
-        "costo": 964
+        "exactitud_media": 0.761,
+        "malos_detectados": 0.4,
+        "costo": 959
       },
       "Boosting": {
-        "exactitud_media": 0.76,
-        "malos_detectados": 0.4933,
-        "costo": 848
+        "exactitud_media": 0.766,
+        "malos_detectados": 0.5,
+        "costo": 834
       },
       "Árbol afinado balanceado (anidada)": {
-        "exactitud_media": 0.661,
-        "malos_detectados": 0.6067,
+        "exactitud_media": 0.673,
+        "malos_detectados": 0.5967,
         "costo": 811
       },
       "Boosting balanceado": {
-        "exactitud_media": 0.752,
-        "malos_detectados": 0.5833,
-        "costo": 748
+        "exactitud_media": 0.756,
+        "malos_detectados": 0.59,
+        "costo": 736
       }
     },
     "1": {
       "Random Forest": {
-        "exactitud_media": 0.762,
-        "malos_detectados": 0.4033,
-        "costo": 954
+        "exactitud_media": 0.771,
+        "malos_detectados": 0.4467,
+        "costo": 893
       },
       "Boosting": {
-        "exactitud_media": 0.757,
-        "malos_detectados": 0.49,
-        "costo": 855
+        "exactitud_media": 0.761,
+        "malos_detectados": 0.5067,
+        "costo": 831
       },
       "Árbol afinado balanceado (anidada)": {
-        "exactitud_media": 0.663,
-        "malos_detectados": 0.6,
-        "costo": 817
+        "exactitud_media": 0.681,
+        "malos_detectados": 0.56,
+        "costo": 847
       },
       "Boosting balanceado": {
-        "exactitud_media": 0.752,
-        "malos_detectados": 0.5733,
-        "costo": 760
+        "exactitud_media": 0.757,
+        "malos_detectados": 0.5967,
+        "costo": 727
       }
     },
     "2": {
       "Random Forest": {
-        "exactitud_media": 0.749,
-        "malos_detectados": 0.3833,
-        "costo": 991
+        "exactitud_media": 0.751,
+        "malos_detectados": 0.4233,
+        "costo": 941
       },
       "Boosting": {
-        "exactitud_media": 0.749,
-        "malos_detectados": 0.47,
-        "costo": 887
+        "exactitud_media": 0.752,
+        "malos_detectados": 0.51,
+        "costo": 836
       },
       "Árbol afinado balanceado (anidada)": {
-        "exactitud_media": 0.658,
-        "malos_detectados": 0.54,
-        "costo": 894
+        "exactitud_media": 0.681,
+        "malos_detectados": 0.6233,
+        "costo": 771
       },
       "Boosting balanceado": {
-        "exactitud_media": 0.746,
-        "malos_detectados": 0.5867,
-        "costo": 750
+        "exactitud_media": 0.742,
+        "malos_detectados": 0.6,
+        "costo": 738
       }
     },
     "3": {
       "Random Forest": {
-        "exactitud_media": 0.749,
-        "malos_detectados": 0.3633,
-        "costo": 1015
+        "exactitud_media": 0.762,
+        "malos_detectados": 0.39,
+        "costo": 970
       },
       "Boosting": {
-        "exactitud_media": 0.746,
-        "malos_detectados": 0.4333,
-        "costo": 934
+        "exactitud_media": 0.759,
+        "malos_detectados": 0.4767,
+        "costo": 869
       },
       "Árbol afinado balanceado (anidada)": {
-        "exactitud_media": 0.668,
-        "malos_detectados": 0.53,
-        "costo": 896
+        "exactitud_media": 0.663,
+        "malos_detectados": 0.6267,
+        "costo": 785
       },
       "Boosting balanceado": {
         "exactitud_media": 0.756,
-        "malos_detectados": 0.5633,
-        "costo": 768
+        "malos_detectados": 0.57,
+        "costo": 760
       }
     },
     "4": {
       "Random Forest": {
-        "exactitud_media": 0.774,
-        "malos_detectados": 0.4067,
-        "costo": 938
+        "exactitud_media": 0.76,
+        "malos_detectados": 0.4267,
+        "costo": 928
       },
       "Boosting": {
-        "exactitud_media": 0.75,
-        "malos_detectados": 0.49,
-        "costo": 862
+        "exactitud_media": 0.766,
+        "malos_detectados": 0.5067,
+        "costo": 826
       },
       "Árbol afinado balanceado (anidada)": {
-        "exactitud_media": 0.673,
-        "malos_detectados": 0.5267,
-        "costo": 895
+        "exactitud_media": 0.666,
+        "malos_detectados": 0.49,
+        "costo": 946
       },
       "Boosting balanceado": {
-        "exactitud_media": 0.756,
+        "exactitud_media": 0.745,
         "malos_detectados": 0.5833,
-        "costo": 744
+        "costo": 755
       }
     }
   },
@@ -364,79 +371,111 @@
         800
       ],
       "entrenamiento": [
-        0.91,
-        0.9868,
-        0.9909,
-        0.9969,
-        0.9988,
-        0.9976,
-        0.9994,
-        0.9992
+        0.895,
+        0.9747,
+        0.9818,
+        0.9902,
+        0.9935,
+        0.9949,
+        0.996,
+        0.9963
       ],
       "validacion": [
-        0.655,
-        0.681,
-        0.726,
-        0.728,
-        0.738,
-        0.741,
-        0.728,
-        0.746
+        0.636,
+        0.676,
+        0.71,
+        0.72,
+        0.729,
+        0.746,
+        0.727,
+        0.752
       ],
-      "brecha_final": 0.2532
+      "brecha_final": 0.2443
     }
   },
   "subgrupos_elegido": {
     "edad_grupo": {
       "19-24": {
         "casos": 149,
-        "exactitud": 0.651,
+        "exactitud": 0.7114,
         "prop_malos": 0.4094,
-        "malos_detectados": 0.5902
+        "malos_detectados": 0.6393,
+        "malos_en_grupo": 61,
+        "caida_vs_global": -0.0393,
+        "concluyente": true,
+        "supera_umbral": false
       },
       "25-34": {
         "casos": 399,
-        "exactitud": 0.7243,
+        "exactitud": 0.7193,
         "prop_malos": 0.3283,
-        "malos_detectados": 0.5573
+        "malos_detectados": 0.5878,
+        "malos_en_grupo": 131,
+        "caida_vs_global": 0.0122,
+        "concluyente": true,
+        "supera_umbral": false
       },
       "35-49": {
         "casos": 327,
-        "exactitud": 0.8043,
+        "exactitud": 0.792,
         "prop_malos": 0.2263,
-        "malos_detectados": 0.4865
+        "malos_detectados": 0.5676,
+        "malos_en_grupo": 74,
+        "caida_vs_global": 0.0324,
+        "concluyente": true,
+        "supera_umbral": false
       },
       "50+": {
         "casos": 125,
-        "exactitud": 0.776,
+        "exactitud": 0.8,
         "prop_malos": 0.272,
-        "malos_detectados": 0.5588
+        "malos_detectados": 0.6471,
+        "malos_en_grupo": 34,
+        "caida_vs_global": -0.0471,
+        "concluyente": true,
+        "supera_umbral": false
       }
     },
     "personal_status": {
       "female div/dep/mar": {
         "casos": 310,
-        "exactitud": 0.729,
+        "exactitud": 0.7613,
         "prop_malos": 0.3516,
-        "malos_detectados": 0.578
+        "malos_detectados": 0.6147,
+        "malos_en_grupo": 109,
+        "caida_vs_global": -0.0147,
+        "concluyente": true,
+        "supera_umbral": false
       },
       "male div/sep": {
         "casos": 50,
-        "exactitud": 0.68,
+        "exactitud": 0.66,
         "prop_malos": 0.4,
-        "malos_detectados": 0.6
+        "malos_detectados": 0.65,
+        "malos_en_grupo": 20,
+        "caida_vs_global": -0.05,
+        "concluyente": false,
+        "supera_umbral": false
       },
       "male mar/wid": {
         "casos": 92,
-        "exactitud": 0.6739,
+        "exactitud": 0.6957,
         "prop_malos": 0.2717,
-        "malos_detectados": 0.4
+        "malos_detectados": 0.48,
+        "malos_en_grupo": 25,
+        "caida_vs_global": 0.12,
+        "concluyente": false,
+        "supera_umbral": false
       },
       "male single": {
         "casos": 548,
-        "exactitud": 0.7737,
+        "exactitud": 0.7646,
         "prop_malos": 0.2664,
-        "malos_detectados": 0.5411
+        "malos_detectados": 0.6027,
+        "malos_en_grupo": 146,
+        "caida_vs_global": -0.0027,
+        "concluyente": true,
+        "supera_umbral": false
       }
     },
     "housing": {
@@ -444,33 +483,53 @@
         "casos": 108,
         "exactitud": 0.6944,
         "prop_malos": 0.4074,
-        "malos_detectados": 0.6136
+        "malos_detectados": 0.6818,
+        "malos_en_grupo": 44,
+        "caida_vs_global": -0.0818,
+        "concluyente": true,
+        "supera_umbral": false
       },
       "own": {
         "casos": 713,
-        "exactitud": 0.7574,
+        "exactitud": 0.7616,
         "prop_malos": 0.2609,
-        "malos_detectados": 0.4892
+        "malos_detectados": 0.5591,
+        "malos_en_grupo": 186,
+        "caida_vs_global": 0.0409,
+        "concluyente": true,
+        "supera_umbral": false
       },
       "rent": {
         "casos": 179,
-        "exactitud": 0.7318,
+        "exactitud": 0.7486,
         "prop_malos": 0.3911,
-        "malos_detectados": 0.6571
+        "malos_detectados": 0.6571,
+        "malos_en_grupo": 70,
+        "caida_vs_global": -0.0571,
+        "concluyente": true,
+        "supera_umbral": false
       }
     },
     "foreign_worker": {
       "no": {
         "casos": 37,
-        "exactitud": 0.8649,
+        "exactitud": 0.8108,
         "prop_malos": 0.1081,
-        "malos_detectados": 0.25
+        "malos_detectados": 0.5,
+        "malos_en_grupo": 4,
+        "caida_vs_global": 0.1,
+        "concluyente": false,
+        "supera_umbral": false
       },
       "yes": {
         "casos": 963,
-        "exactitud": 0.7414,
+        "exactitud": 0.7497,
         "prop_malos": 0.3074,
-        "malos_detectados": 0.5507
+        "malos_detectados": 0.6014,
+        "malos_en_grupo": 296,
+        "caida_vs_global": -0.0014,
+        "concluyente": true,
+        "supera_umbral": false
       }
     }
   }

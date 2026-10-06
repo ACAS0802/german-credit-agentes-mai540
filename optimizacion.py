@@ -11,6 +11,16 @@ Protocolo común (el mismo para todos los modelos):
 - Costo: 5 × (malos aprobados) + 1 × (buenos rechazados), la matriz de costos del dataset
   original (Hofmann, 1994). Aprobar un crédito malo cuesta 5 veces más.
 - Tiempo de ajuste: media por pliegue de cross_validate, con n_jobs=1 para comparar en igualdad.
+- Entradas: ningún modelo usa VARIABLES_SENSIBLES (edad, estado civil/sexo, trabajador extranjero);
+  se usan solo para auditar (hallazgo E4 de auditoria/AUDIT_REPORT.md).
+
+Regla de elección (hallazgo A6): entre los modelos cuya exactitud media supera 0.70 («siempre
+bueno»), el de menor costo; la elección se confirma solo si ese modelo tiene el menor costo también
+en las 5 semillas adicionales de la validación cruzada (0 a 4).
+
+Umbral de disparidad (hallazgo D3): caída de 0.10 absoluto en malos detectados de un subgrupo frente
+al global (valor por omisión de la Skill). Un subgrupo con menos de 30 malos se marca como no
+concluyente (hallazgo D4).
 """
 import json
 import os
@@ -30,9 +40,10 @@ from auditoria import exactitud_por_subgrupo
 from busqueda import PARAM_GRID, buscar_con_prueba
 from curvas import curva_aprendizaje
 from datos import cargar_datos
-from modelos import crear_pipeline, modelo_elegido, tres_modelos
+from modelos import VARIABLES_SENSIBLES, crear_pipeline, modelo_elegido, tres_modelos
 
 COSTO_MALO_APROBADO, COSTO_BUENO_RECHAZADO = 5, 1
+UMBRAL_DISPARIDAD, MIN_MALOS = 0.10, 30
 CV_INTERNA = StratifiedKFold(n_splits=5, shuffle=True, random_state=1)  # distinta de la externa
 os.makedirs("resultados", exist_ok=True)
 os.makedirs("figs", exist_ok=True)
@@ -62,15 +73,18 @@ def main():
         "espacio_busqueda": {k: [str(v) for v in vs] for k, vs in PARAM_GRID.items()},
         "combinaciones": int(np.prod([len(v) for v in PARAM_GRID.values()])),
         "costo": f"{COSTO_MALO_APROBADO} × malo aprobado + {COSTO_BUENO_RECHAZADO} × bueno rechazado",
+        "variables_excluidas_del_modelo": list(VARIABLES_SENSIBLES),
+        "regla_eleccion": "menor costo entre modelos con exactitud > 0.70, confirmado en semillas 0-4",
+        "umbral_disparidad": f"{UMBRAL_DISPARIDAD} en malos detectados; concluyente si >= {MIN_MALOS} malos",
         "sklearn": sklearn.__version__}}
 
     # 1. Búsqueda sistemática del árbol
-    arbol = crear_pipeline(DecisionTreeClassifier(random_state=42), cols_cat)
+    arbol = crear_pipeline(DecisionTreeClassifier(random_state=42), cols_cat, VARIABLES_SENSIBLES)
     gs = GridSearchCV(arbol, PARAM_GRID, cv=cv, scoring="accuracy", n_jobs=1).fit(X, y)
     defecto = evaluar(arbol, X, y, cv)
     afinado_fijo = evaluar(crear_pipeline(DecisionTreeClassifier(
         random_state=42, max_depth=gs.best_params_["modelo__max_depth"],
-        min_samples_leaf=gs.best_params_["modelo__min_samples_leaf"]), cols_cat), X, y, cv)
+        min_samples_leaf=gs.best_params_["modelo__min_samples_leaf"]), cols_cat, VARIABLES_SENSIBLES), X, y, cv)
     tabla_gs = pd.DataFrame(gs.cv_results_)[["param_modelo__max_depth", "param_modelo__min_samples_leaf",
                                              "mean_test_score", "std_test_score", "rank_test_score"]]
     tabla_gs.sort_values("rank_test_score").to_csv("resultados/busqueda_arbol.csv", index=False)
@@ -96,27 +110,27 @@ def main():
     modelos = tres_modelos()
     comparacion = {
         "Árbol afinado (anidada)": anidada,
-        "Random Forest": evaluar(crear_pipeline(modelos["Random Forest"], cols_cat), X, y, cv),
-        "Boosting": evaluar(crear_pipeline(modelos["Boosting"], cols_cat), X, y, cv),
+        "Random Forest": evaluar(crear_pipeline(modelos["Random Forest"], cols_cat, VARIABLES_SENSIBLES), X, y, cv),
+        "Boosting": evaluar(crear_pipeline(modelos["Boosting"], cols_cat, VARIABLES_SENSIBLES), X, y, cv),
     }
     # Error que más preocupa (aprobar un malo): los mismos modelos con pesos de clase balanceados
-    gs_bal = GridSearchCV(crear_pipeline(DecisionTreeClassifier(random_state=42, class_weight="balanced"), cols_cat),
+    gs_bal = GridSearchCV(crear_pipeline(DecisionTreeClassifier(random_state=42, class_weight="balanced"), cols_cat, VARIABLES_SENSIBLES),
                           PARAM_GRID, cv=CV_INTERNA, scoring="accuracy", n_jobs=1)
     from sklearn.ensemble import RandomForestClassifier
     comparacion["Árbol afinado balanceado (anidada)"] = evaluar(gs_bal, X, y, cv)
     comparacion["Random Forest balanceado"] = evaluar(crear_pipeline(
-        RandomForestClassifier(random_state=42, class_weight="balanced"), cols_cat), X, y, cv)
-    comparacion["Boosting balanceado (elegido)"] = evaluar(crear_pipeline(modelo_elegido(), cols_cat), X, y, cv)
+        RandomForestClassifier(random_state=42, class_weight="balanced"), cols_cat, VARIABLES_SENSIBLES), X, y, cv)
+    comparacion["Boosting balanceado (elegido)"] = evaluar(crear_pipeline(modelo_elegido(), cols_cat, VARIABLES_SENSIBLES), X, y, cv)
     salida["comparacion"] = comparacion
 
     # Robustez: ¿la elección depende de la semilla de la validación cruzada?
     robustez = {}
-    candidatos = (("Random Forest", lambda: crear_pipeline(modelos["Random Forest"], cols_cat)),
-                  ("Boosting", lambda: crear_pipeline(modelos["Boosting"], cols_cat)),
+    candidatos = (("Random Forest", lambda: crear_pipeline(modelos["Random Forest"], cols_cat, VARIABLES_SENSIBLES)),
+                  ("Boosting", lambda: crear_pipeline(modelos["Boosting"], cols_cat, VARIABLES_SENSIBLES)),
                   ("Árbol afinado balanceado (anidada)", lambda: GridSearchCV(
-                      crear_pipeline(DecisionTreeClassifier(random_state=42, class_weight="balanced"), cols_cat),
+                      crear_pipeline(DecisionTreeClassifier(random_state=42, class_weight="balanced"), cols_cat, VARIABLES_SENSIBLES),
                       PARAM_GRID, cv=CV_INTERNA, scoring="accuracy", n_jobs=-1)),
-                  ("Boosting balanceado", lambda: crear_pipeline(modelo_elegido(), cols_cat)))
+                  ("Boosting balanceado", lambda: crear_pipeline(modelo_elegido(), cols_cat, VARIABLES_SENSIBLES)))
     for semilla in range(5):
         cv_s = StratifiedKFold(n_splits=5, shuffle=True, random_state=semilla)
         robustez[semilla] = {n: {k: evaluar(f(), X, y, cv_s)[k] for k in ("exactitud_media", "malos_detectados", "costo")}
@@ -126,8 +140,9 @@ def main():
     # 4. Curvas de aprendizaje: diagnóstico de la 6.1 (árbol por defecto) frente al elegido
     curvas = {}
     fig, ejes = plt.subplots(1, 2, figsize=(10, 3.8), sharey=True)
-    for ax, (nombre, pipe) in zip(ejes, (("Árbol por defecto (diagnóstico 6.1)", arbol),
-                                         ("Boosting balanceado (elegido)", crear_pipeline(modelo_elegido(), cols_cat)))):
+    for ax, (nombre, pipe) in zip(ejes, (("Árbol por defecto (diagnóstico 6.1)",
+                                          crear_pipeline(DecisionTreeClassifier(random_state=42), cols_cat)),  # tal como en la 6.1
+                                         ("Boosting balanceado (elegido)", crear_pipeline(modelo_elegido(), cols_cat, VARIABLES_SENSIBLES)))):
         t, ent, val = curva_aprendizaje(pipe, X, y, cv)
         curvas[nombre] = {"tamanos": [int(v) for v in t], "entrenamiento": [round(float(v), 4) for v in ent],
                           "validacion": [round(float(v), 4) for v in val],
@@ -143,12 +158,17 @@ def main():
     salida["curvas"] = curvas
 
     # 5. Auditoría por subgrupo del modelo elegido (las variables sensibles solo auditan)
-    elegido = crear_pipeline(modelo_elegido(), cols_cat)
+    elegido = crear_pipeline(modelo_elegido(), cols_cat, VARIABLES_SENSIBLES)
     edad = pd.cut(X["age"], [0, 24, 34, 49, 120], labels=["19-24", "25-34", "35-49", "50+"]).astype(str)
     subgrupos = {}
     for col in ("edad_grupo", "personal_status", "housing", "foreign_worker"):
         tabla = (_por_grupo_externo(elegido, X, y, cv, edad) if col == "edad_grupo"
                  else exactitud_por_subgrupo(elegido, X, y, cv, col))
+        malos_global = recall_score(y, cross_val_predict(elegido, X, y, cv=cv))
+        tabla["malos_en_grupo"] = (tabla["casos"] * tabla["prop_malos"]).round().astype(int)
+        tabla["caida_vs_global"] = (malos_global - tabla["malos_detectados"]).round(4)
+        tabla["concluyente"] = tabla["malos_en_grupo"] >= MIN_MALOS
+        tabla["supera_umbral"] = tabla["concluyente"] & (tabla["caida_vs_global"] > UMBRAL_DISPARIDAD)
         tabla.round(4).to_csv(f"resultados/subgrupos_{col}.csv")
         subgrupos[col] = tabla.round(4).to_dict(orient="index")
     salida["subgrupos_elegido"] = subgrupos

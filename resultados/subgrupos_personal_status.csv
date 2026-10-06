@@ -1,5 +1,5 @@
-grupo,casos,exactitud,prop_malos,malos_detectados
-female div/dep/mar,310,0.729,0.3516,0.578
-male div/sep,50,0.68,0.4,0.6
-male mar/wid,92,0.6739,0.2717,0.4
-male single,548,0.7737,0.2664,0.5411
+grupo,casos,exactitud,prop_malos,malos_detectados,malos_en_grupo,caida_vs_global,concluyente,supera_umbral
+female div/dep/mar,310,0.7613,0.3516,0.6147,109,-0.0147,True,False
+male div/sep,50,0.66,0.4,0.65,20,-0.05,False,False
+male mar/wid,92,0.6957,0.2717,0.48,25,0.12,False,False
+male single,548,0.7646,0.2664,0.6027,146,-0.0027,True,False

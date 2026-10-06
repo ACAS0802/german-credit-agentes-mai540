@@ -1,4 +1,4 @@
-grupo,casos,exactitud,prop_malos,malos_detectados
-for free,108,0.6944,0.4074,0.6136
-own,713,0.7574,0.2609,0.4892
-rent,179,0.7318,0.3911,0.6571
+grupo,casos,exactitud,prop_malos,malos_detectados,malos_en_grupo,caida_vs_global,concluyente,supera_umbral
+for free,108,0.6944,0.4074,0.6818,44,-0.0818,True,False
+own,713,0.7616,0.2609,0.5591,186,0.0409,True,False
+rent,179,0.7486,0.3911,0.6571,70,-0.0571,True,False

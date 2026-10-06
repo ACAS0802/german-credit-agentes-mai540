@@ -1,5 +1,5 @@
-grupo,casos,exactitud,prop_malos,malos_detectados
-19-24,149,0.651,0.4094,0.5902
-25-34,399,0.7243,0.3283,0.5573
-35-49,327,0.8043,0.2263,0.4865
-50+,125,0.776,0.272,0.5588
+grupo,casos,exactitud,prop_malos,malos_detectados,malos_en_grupo,caida_vs_global,concluyente,supera_umbral
+19-24,149,0.7114,0.4094,0.6393,61,-0.0393,True,False
+25-34,399,0.7193,0.3283,0.5878,131,0.0122,True,False
+35-49,327,0.792,0.2263,0.5676,74,0.0324,True,False
+50+,125,0.8,0.272,0.6471,34,-0.0471,True,False
