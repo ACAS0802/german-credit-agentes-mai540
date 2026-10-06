@@ -8,8 +8,11 @@ from sklearn.model_selection import learning_curve      # learning_curve: entren
 
 def curva_aprendizaje(pipeline, X, y, cv):
     """Devuelve los tamaños de entrenamiento y la exactitud media en entrenamiento y en validación."""
-    # TODO 7 (en clase): learning_curve con train_sizes y promedio por pliegue
-    raise NotImplementedError("TODO 7: completar en clase")
+    tamanos, ent, val = learning_curve(
+        pipeline, X, y, cv=cv, scoring="accuracy",
+        train_sizes=np.linspace(0.1, 1.0, 8),          # de 80 a 800 casos de entrenamiento
+        shuffle=True, random_state=42)                 # semilla fija: la curva se reproduce
+    return tamanos, ent.mean(axis=1), val.mean(axis=1) # promedio de los 5 pliegues en cada tamaño
 
 
 def graficar(tamanos, ent, val, titulo, ruta):
