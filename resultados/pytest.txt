@@ -1,0 +1,15 @@
+cachedir: .pytest_cache
+rootdir: /home/claude/german-credit-agentes-mai540
+plugins: anyio-4.13.0
+collecting ... collected 8 items
+
+tests/test_modelo.py::test_supera_a_siempre_bueno[\xc1rbol] XFAIL (e...) [ 12%]
+tests/test_modelo.py::test_supera_a_siempre_bueno[Random Forest] PASSED  [ 25%]
+tests/test_modelo.py::test_supera_a_siempre_bueno[Boosting] PASSED       [ 37%]
+tests/test_modelo.py::test_resultado_estable PASSED                      [ 50%]
+tests/test_modelo.py::test_codificacion_dentro_del_pipeline PASSED       [ 62%]
+tests/test_modelo.py::test_elegido_supera_a_siempre_bueno PASSED         [ 75%]
+tests/test_modelo.py::test_elegido_detecta_al_menos_la_mitad_de_los_malos PASSED [ 87%]
+tests/test_modelo.py::test_variables_sensibles_no_deciden PASSED         [100%]
+
+========================= 7 passed, 1 xfailed in 5.95s =========================
