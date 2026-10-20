@@ -34,9 +34,9 @@
   "capacidad": {
     "ganador_en_toda_la_muestra": {
       "learning_rate": 0.03,
-      "max_iter": 300,
-      "max_leaf_nodes": 4,
-      "min_samples_leaf": 50
+      "max_iter": 100,
+      "max_leaf_nodes": 8,
+      "min_samples_leaf": 20
     },
     "nota": "Exploración para ver la capacidad (E3). Su puntaje es optimista; el número honesto es la anidada."
   },

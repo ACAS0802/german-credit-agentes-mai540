@@ -57,8 +57,11 @@ def candidatos(cols_cat):
 
 
 def capacidad(X, y, cols_cat, cv):
-    """E3: exploración de capacidad con entrenamiento y validación juntos."""
-    gs = boosting_afinado(cols_cat, cv, n_jobs=N_JOBS).fit(X, y)
+    """E3: exploración de capacidad con entrenamiento y validación juntos. Usa CV_INTERNA, la misma
+    partición con la que la elección final (paso 5) afina el boosting, para que la tabla y la figura
+    muestren exactamente la búsqueda que produjo el modelo elegido. (Con la partición externa gana
+    otra combinación, 4 hojas: varias quedan a menos de 10 unidades de costo entre sí.)"""
+    gs = boosting_afinado(cols_cat, CV_INTERNA, n_jobs=N_JOBS).fit(X, y)
     r = pd.DataFrame(gs.cv_results_)
     tabla = pd.DataFrame({
         "max_leaf_nodes": r["param_modelo__max_leaf_nodes"], "min_samples_leaf": r["param_modelo__min_samples_leaf"],
@@ -66,7 +69,7 @@ def capacidad(X, y, cols_cat, cv):
         "exactitud_entrenamiento": r["mean_train_exactitud"].round(4),
         "exactitud_validacion": r["mean_test_exactitud"].round(4),
         "brecha": (r["mean_train_exactitud"] - r["mean_test_exactitud"]).round(4),
-        "costo_validacion_1000_casos": (-r["mean_test_costo"] * cv.get_n_splits()).round(0).astype(int),
+        "costo_validacion_1000_casos": (-r["mean_test_costo"] * CV_INTERNA.get_n_splits()).round(0).astype(int),
     })
     tabla["cumple_exactitud"] = tabla["exactitud_validacion"] > EXACTITUD_MINIMA
     tabla.sort_values("costo_validacion_1000_casos").to_csv("resultados/capacidad_boosting.csv", index=False)
@@ -88,7 +91,8 @@ def capacidad(X, y, cols_cat, cv):
     a2.set_title("Costo en validación", fontsize=10, loc="left")
     for a in (a1, a2):
         a.grid(alpha=.3)
-    fig.suptitle(f"Boosting balanceado · resto fijo en {g}", fontsize=9)
+    fig.suptitle(f"Boosting balanceado · fijos: tasa {g['learning_rate']}, {g['max_iter']} árboles, "
+                 f"{g['min_samples_leaf']} casos por hoja (los del modelo elegido)", fontsize=9)
     fig.tight_layout(); fig.savefig("figs/capacidad_boosting.png", dpi=200); plt.close(fig)
     return {"ganador_en_toda_la_muestra": g,
             "nota": "Exploración para ver la capacidad (E3). Su puntaje es optimista; el número honesto es la anidada."}
