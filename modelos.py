@@ -35,6 +35,32 @@ def tres_modelos():
     }
 
 
+# Tarea 8.1 · Capacidad del boosting (hallazgo H2 / E3). En la 6.2 el boosting quedó con sus valores por
+# omisión y su curva mostraba 0.996 en entrenamiento frente a 0.752 en validación: casi memorizaba.
+# Se exploran los hiperparámetros que controlan cuánto puede aprender:
+#   max_leaf_nodes   hojas por árbol (31 por omisión): cuántas reglas puede combinar cada árbol
+#   min_samples_leaf casos mínimos por hoja (20 por omisión): evita reglas basadas en pocos casos
+#   learning_rate    cuánto corrige cada árbol nuevo (0.1 por omisión)
+#   max_iter         número de árboles (100 por omisión)
+PARAM_GRID_BOOSTING = {
+    "modelo__max_leaf_nodes": [4, 8, 31],
+    "modelo__min_samples_leaf": [20, 50],
+    "modelo__learning_rate": [0.03, 0.1],
+    "modelo__max_iter": [50, 100, 300],
+}
+
+
+def boosting_afinado(cols_cat, cv_interna, n_jobs=1):
+    """Boosting balanceado cuya capacidad se elige con la regla del proyecto (regla.py) dentro de
+    cv_interna. Reporta entrenamiento y validación (return_train_score) para ver dónde memoriza."""
+    from sklearn.model_selection import GridSearchCV
+    from regla import METRICAS, refit_por_regla
+    base = crear_pipeline(HistGradientBoostingClassifier(class_weight="balanced", random_state=42),
+                          cols_cat, VARIABLES_SENSIBLES)
+    return GridSearchCV(base, PARAM_GRID_BOOSTING, cv=cv_interna, scoring=METRICAS,
+                        refit=refit_por_regla, return_train_score=True, n_jobs=n_jobs)
+
+
 def modelo_elegido():
     """Modelo recomendado en la Tarea 6.2: boosting con pesos de clase balanceados.
     Aprobar un crédito malo cuesta más que rechazar uno bueno; con class_weight='balanced'
