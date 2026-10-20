@@ -116,7 +116,7 @@ python capstone.py --auditoria   # solo la auditoría por subgrupo y categoría,
 pytest -v
 ```
 
-Se espera `18 passed, 1 xfailed` en unos 5 segundos (el árbol sin límite de profundidad no supera la línea base; es la lección de la Tarea 6.1 y está marcado como fallo esperado). La salida guardada está en `resultados/pytest.txt`.
+Se espera `18 passed, 1 xfailed` en unos 5 segundos (el árbol sin límite de profundidad no supera la línea base; es la lección de la Tarea 6.1 y está marcado como fallo esperado). La salida guardada está en `resultados/pytest.txt`, y el registro de las tres comprobaciones antes de entregar (pruebas, hook y auditoría) en `resultados/comprobaciones.md`.
 
 | Prueba | Qué comprueba |
 |---|---|
