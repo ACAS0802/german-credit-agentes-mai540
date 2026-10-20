@@ -24,8 +24,9 @@ MIN_MALOS = 30                      # por debajo, el grupo se reporta como «no 
 
 
 def auditar_grupos(y, pred, grupos, costo_malo=5):
-    """Desglose por grupo a partir de predicciones fuera de pliegue (cada caso lo predijo un modelo
-    que no lo vio). 'grupos' puede ser una columna del modelo o una que solo audita (edad, sexo)."""
+    """Desglose por grupo a partir de predicciones fuera de pliegue. Para que sea honesto, cada caso
+    debe predecirlo un modelo que no lo vio ni al entrenar ni al elegir sus hiperparámetros (capstone.py
+    usa predicciones anidadas). 'grupos' puede ser una columna del modelo o una que solo audita."""
     t = pd.DataFrame({"grupo": np.asarray(grupos), "real": np.asarray(y), "pred": np.asarray(pred)})
     t["acierto"] = t["real"] == t["pred"]
     malos = t[t["real"] == 1]

@@ -2,14 +2,17 @@
 auditoría por subgrupo y errores por categoría del modelo que elige la regla.
 
 Ejecutar desde la raíz:  python capstone.py      (unos 25 minutos con 2 núcleos)
-                  python capstone.py --auditoria   (solo el paso 6, en segundos)
+                  python capstone.py --auditoria   (solo el paso 6, un par de minutos)
 Escribe resultados/capstone.json, resultados/capacidad_boosting.csv, resultados/subgrupos/*.csv,
 resultados/errores/*.csv y figs/capacidad_boosting.png.
 
 Protocolo común (el mismo para todos los modelos, igual que en la 6.2):
 - Validación cruzada externa: StratifiedKFold(5, shuffle=True, random_state=42) de datos.py.
-- Toda búsqueda o elección ocurre dentro de una validación interna (random_state=1) que solo ve
-  los datos de entrenamiento de cada pliegue externo.
+- Las cifras que se reportan (pasos 2, 3, 4 y 6) son anidadas: toda búsqueda o elección ocurre
+  dentro de una validación interna (random_state=1) que solo ve el entrenamiento de cada pliegue
+  externo, así que ningún caso de prueba influye en los hiperparámetros con que se le predice.
+- Dos pasos usan los 1,000 casos a propósito y no producen cifras de desempeño: el 1 (explorar la
+  capacidad, para ver dónde memoriza) y el 5 (elegir y entrenar el modelo final de la herramienta).
 - Ningún modelo comparado usa VARIABLES_SENSIBLES; se usan solo para auditar.
 - Regla de elección: regla.py (exactitud > 0.70 y, entre esos, menor costo 5:1).
 """
@@ -123,10 +126,17 @@ def por_grupo(y, pred, grupos, carpeta, nombre):
 
 
 def auditar_elegido(s, X, y, cols_cat, cv):
-    """Paso 6: auditoría por subgrupo y errores por categoría de modelo_elegido(). Tarda segundos y se
-    puede repetir sola con  python capstone.py --auditoria  (reutiliza los pasos 1 a 5 ya guardados)."""
-    elegido = crear_pipeline(modelo_elegido(), cols_cat, VARIABLES_SENSIBLES)
-    s["modelo_elegido_misma_cv"], pred = evaluar_por_pliegues(elegido, X, y, cv)
+    """Paso 6: auditoría por subgrupo y errores por categoría. Tarda un par de minutos y se puede
+    repetir sola con  python capstone.py --auditoria  (reutiliza los pasos 1 a 5 ya guardados).
+
+    Las predicciones salen del procedimiento que produjo el modelo, anidado: en cada pliegue externo
+    el boosting se afina solo con el entrenamiento (hallazgo H1 de la tercera auditoría). Si se usara
+    modelo_elegido() con sus hiperparámetros ya fijos, cada caso de prueba habría influido en elegirlos.
+    Esa versión se guarda solo como referencia («modelo_elegido_misma_cv», optimista)."""
+    s["modelo_elegido_misma_cv"], _ = evaluar_por_pliegues(
+        crear_pipeline(modelo_elegido(), cols_cat, VARIABLES_SENSIBLES), X, y, cv)
+    s["procedimiento_anidado"], pred = evaluar_por_pliegues(
+        boosting_afinado(cols_cat, CV_INTERNA, n_jobs=N_JOBS), X, y, cv)
     edad = pd.cut(X["age"], [0, 24, 34, 49, 120], labels=["19-24", "25-34", "35-49", "50+"]).astype(str)
     sexo = X["personal_status"].str.split().str[0]                                  # male / female
     s["subgrupos"] = {n: por_grupo(y, pred, g, "subgrupos", n) for n, g in
@@ -147,11 +157,11 @@ def main():
     if "--auditoria" in sys.argv:                       # solo el paso 6, sobre lo ya calculado
         with open("resultados/capstone.json", encoding="utf-8") as f:
             s = json.load(f)
-        print("6. Auditoría por subgrupo y errores por categoría de modelo_elegido()")
+        print("6. Auditoría por subgrupo y errores por categoría (predicciones anidadas)")
         auditar_elegido(s, X, y, cols_cat, cv)
         with open("resultados/capstone.json", "w", encoding="utf-8") as f:
             json.dump(s, f, ensure_ascii=False, indent=2, default=str)
-        print("  ", s["modelo_elegido_misma_cv"])
+        print("   anidado:", s["procedimiento_anidado"])
         return
     cands = candidatos(cols_cat)
     s = {"configuracion": {
@@ -189,7 +199,7 @@ def main():
                            "tabla_de_la_regla": final.tabla_}
     print("  ", s["eleccion_final"]["modelo"], s["eleccion_final"]["hiperparametros"])
 
-    print("6. Auditoría por subgrupo y errores por categoría de modelo_elegido()")
+    print("6. Auditoría por subgrupo y errores por categoría (predicciones anidadas)")
     auditar_elegido(s, X, y, cols_cat, cv)
 
     with open("resultados/capstone.json", "w", encoding="utf-8") as f:

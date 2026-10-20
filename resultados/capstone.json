@@ -513,191 +513,191 @@
     "edad_grupo": {
       "19-24": {
         "casos": 149,
-        "exactitud": 0.651,
+        "exactitud": 0.6242,
         "prop_malos": 0.4094,
         "malos_en_grupo": 61,
-        "malos_detectados": 0.7377,
-        "caida_vs_global": -0.0377,
+        "malos_detectados": 0.7213,
+        "caida_vs_global": -0.008,
         "costo_extra": 0.0,
-        "p_valor": 0.4715,
+        "p_valor": 0.8773,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.4091
+        "buenos_rechazados": 0.4432
       },
       "25-34": {
         "casos": 399,
-        "exactitud": 0.6842,
+        "exactitud": 0.6817,
         "prop_malos": 0.3283,
         "malos_en_grupo": 131,
-        "malos_detectados": 0.7176,
-        "caida_vs_global": -0.0176,
-        "costo_extra": 0.0,
-        "p_valor": 0.5591,
+        "malos_detectados": 0.7023,
+        "caida_vs_global": 0.011,
+        "costo_extra": 7.2333,
+        "p_valor": 0.7096,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.3321
+        "buenos_rechazados": 0.3284
       },
       "35-49": {
         "casos": 327,
-        "exactitud": 0.7523,
+        "exactitud": 0.7309,
         "prop_malos": 0.2263,
         "malos_en_grupo": 74,
-        "malos_detectados": 0.6486,
-        "caida_vs_global": 0.0514,
-        "costo_extra": 19.0,
-        "p_valor": 0.2667,
+        "malos_detectados": 0.7027,
+        "caida_vs_global": 0.0106,
+        "costo_extra": 3.9333,
+        "p_valor": 0.8158,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2174
+        "buenos_rechazados": 0.2609
       },
       "50+": {
         "casos": 125,
-        "exactitud": 0.752,
+        "exactitud": 0.8,
         "prop_malos": 0.272,
         "malos_en_grupo": 34,
-        "malos_detectados": 0.6765,
-        "caida_vs_global": 0.0235,
-        "costo_extra": 4.0,
-        "p_valor": 0.7505,
+        "malos_detectados": 0.7647,
+        "caida_vs_global": -0.0514,
+        "costo_extra": 0.0,
+        "p_valor": 0.4818,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2198
+        "buenos_rechazados": 0.1868
       }
     },
     "sexo": {
       "female": {
         "casos": 310,
-        "exactitud": 0.6903,
+        "exactitud": 0.7065,
         "prop_malos": 0.3516,
         "malos_en_grupo": 109,
-        "malos_detectados": 0.6697,
-        "caida_vs_global": 0.0303,
-        "costo_extra": 16.5,
-        "p_valor": 0.3873,
+        "malos_detectados": 0.6881,
+        "caida_vs_global": 0.0253,
+        "costo_extra": 13.7667,
+        "p_valor": 0.4648,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2985
+        "buenos_rechazados": 0.2836
       },
       "male": {
         "casos": 690,
-        "exactitud": 0.7188,
+        "exactitud": 0.7029,
         "prop_malos": 0.2768,
         "malos_en_grupo": 191,
-        "malos_detectados": 0.7173,
-        "caida_vs_global": -0.0173,
+        "malos_detectados": 0.7277,
+        "caida_vs_global": -0.0144,
         "costo_extra": 0.0,
-        "p_valor": 0.3873,
+        "p_valor": 0.4648,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2806
+        "buenos_rechazados": 0.3066
       }
     },
     "personal_status": {
       "female div/dep/mar": {
         "casos": 310,
-        "exactitud": 0.6903,
+        "exactitud": 0.7065,
         "prop_malos": 0.3516,
         "malos_en_grupo": 109,
-        "malos_detectados": 0.6697,
-        "caida_vs_global": 0.0303,
-        "costo_extra": 16.5,
-        "p_valor": 0.3873,
+        "malos_detectados": 0.6881,
+        "caida_vs_global": 0.0253,
+        "costo_extra": 13.7667,
+        "p_valor": 0.4648,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2985
+        "buenos_rechazados": 0.2836
       },
       "male div/sep": {
         "casos": 50,
-        "exactitud": 0.62,
+        "exactitud": 0.68,
         "prop_malos": 0.4,
         "malos_en_grupo": 20,
-        "malos_detectados": 0.75,
-        "caida_vs_global": -0.05,
+        "malos_detectados": 0.8,
+        "caida_vs_global": -0.0867,
         "costo_extra": 0.0,
-        "p_valor": 0.6135,
+        "p_valor": 0.375,
         "veredicto": "no concluyente",
-        "buenos_rechazados": 0.4667
+        "buenos_rechazados": 0.4
       },
       "male mar/wid": {
         "casos": 92,
-        "exactitud": 0.7065,
+        "exactitud": 0.6304,
         "prop_malos": 0.2717,
         "malos_en_grupo": 25,
-        "malos_detectados": 0.72,
-        "caida_vs_global": -0.02,
-        "costo_extra": 0.0,
-        "p_valor": 0.8197,
+        "malos_detectados": 0.6,
+        "caida_vs_global": 0.1133,
+        "costo_extra": 14.1667,
+        "p_valor": 0.1906,
         "veredicto": "no concluyente",
-        "buenos_rechazados": 0.2985
+        "buenos_rechazados": 0.3582
       },
       "male single": {
         "casos": 548,
-        "exactitud": 0.7299,
+        "exactitud": 0.7172,
         "prop_malos": 0.2664,
         "malos_en_grupo": 146,
-        "malos_detectados": 0.7123,
-        "caida_vs_global": -0.0123,
+        "malos_detectados": 0.7397,
+        "caida_vs_global": -0.0264,
         "costo_extra": 0.0,
-        "p_valor": 0.65,
+        "p_valor": 0.325,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2637
+        "buenos_rechazados": 0.291
       }
     },
     "foreign_worker": {
       "no": {
         "casos": 37,
-        "exactitud": 0.8378,
+        "exactitud": 0.8649,
         "prop_malos": 0.1081,
         "malos_en_grupo": 4,
         "malos_detectados": 1.0,
-        "caida_vs_global": -0.3,
+        "caida_vs_global": -0.2867,
         "costo_extra": 0.0,
-        "p_valor": 0.1875,
+        "p_valor": 0.2018,
         "veredicto": "no concluyente",
-        "buenos_rechazados": 0.1818
+        "buenos_rechazados": 0.1515
       },
       "yes": {
         "casos": 963,
-        "exactitud": 0.7051,
+        "exactitud": 0.6978,
         "prop_malos": 0.3074,
         "malos_en_grupo": 296,
-        "malos_detectados": 0.6959,
-        "caida_vs_global": 0.0041,
-        "costo_extra": 6.0,
-        "p_valor": 0.1875,
+        "malos_detectados": 0.7095,
+        "caida_vs_global": 0.0039,
+        "costo_extra": 5.7333,
+        "p_valor": 0.2018,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2909
+        "buenos_rechazados": 0.3073
       }
     },
     "housing": {
       "for free": {
         "casos": 108,
-        "exactitud": 0.6667,
+        "exactitud": 0.6852,
         "prop_malos": 0.4074,
         "malos_en_grupo": 44,
-        "malos_detectados": 0.7273,
-        "caida_vs_global": -0.0273,
+        "malos_detectados": 0.7727,
+        "caida_vs_global": -0.0594,
         "costo_extra": 0.0,
-        "p_valor": 0.6691,
+        "p_valor": 0.3456,
         "veredicto": "dentro del umbral",
         "buenos_rechazados": 0.375
       },
       "own": {
         "casos": 713,
-        "exactitud": 0.7195,
+        "exactitud": 0.7139,
         "prop_malos": 0.2609,
         "malos_en_grupo": 186,
-        "malos_detectados": 0.6882,
-        "caida_vs_global": 0.0118,
-        "costo_extra": 11.0,
-        "p_valor": 0.568,
+        "malos_detectados": 0.6828,
+        "caida_vs_global": 0.0305,
+        "costo_extra": 28.4,
+        "p_valor": 0.1352,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2694
+        "buenos_rechazados": 0.2751
       },
       "rent": {
         "casos": 179,
-        "exactitud": 0.6983,
+        "exactitud": 0.676,
         "prop_malos": 0.3911,
         "malos_en_grupo": 70,
-        "malos_detectados": 0.7143,
-        "caida_vs_global": -0.0143,
+        "malos_detectados": 0.7571,
+        "caida_vs_global": -0.0438,
         "costo_extra": 0.0,
-        "p_valor": 0.7658,
+        "p_valor": 0.3546,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.3119
+        "buenos_rechazados": 0.3761
       }
     }
   },
@@ -705,274 +705,323 @@
     "proposito": {
       "business": {
         "casos": 97,
-        "exactitud": 0.5567,
+        "exactitud": 0.5979,
         "prop_malos": 0.3505,
         "malos_en_grupo": 34,
-        "malos_detectados": 0.6765,
-        "caida_vs_global": 0.0235,
-        "costo_extra": 4.0,
-        "p_valor": 0.7505,
+        "malos_detectados": 0.7647,
+        "caida_vs_global": -0.0514,
+        "costo_extra": 0.0,
+        "p_valor": 0.4818,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.5079
+        "buenos_rechazados": 0.4921
       },
       "domestic appliance": {
         "casos": 12,
-        "exactitud": 0.75,
+        "exactitud": 0.8333,
         "prop_malos": 0.3333,
         "malos_en_grupo": 4,
         "malos_detectados": 1.0,
-        "caida_vs_global": -0.3,
+        "caida_vs_global": -0.2867,
         "costo_extra": 0.0,
-        "p_valor": 0.1875,
+        "p_valor": 0.2018,
         "veredicto": "no concluyente",
-        "buenos_rechazados": 0.375
+        "buenos_rechazados": 0.25
       },
       "education": {
         "casos": 50,
-        "exactitud": 0.64,
+        "exactitud": 0.6,
         "prop_malos": 0.44,
         "malos_en_grupo": 22,
-        "malos_detectados": 0.6364,
-        "caida_vs_global": 0.0636,
-        "costo_extra": 7.0,
-        "p_valor": 0.4986,
+        "malos_detectados": 0.5455,
+        "caida_vs_global": 0.1679,
+        "costo_extra": 18.4667,
+        "p_valor": 0.0705,
         "veredicto": "no concluyente",
         "buenos_rechazados": 0.3571
       },
       "furniture/equipment": {
         "casos": 181,
-        "exactitud": 0.6298,
+        "exactitud": 0.6243,
         "prop_malos": 0.3204,
         "malos_en_grupo": 58,
         "malos_detectados": 0.7414,
-        "caida_vs_global": -0.0414,
+        "caida_vs_global": -0.028,
         "costo_extra": 0.0,
-        "p_valor": 0.4439,
+        "p_valor": 0.599,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.4228
+        "buenos_rechazados": 0.4309
       },
       "new car": {
         "casos": 234,
-        "exactitud": 0.7308,
+        "exactitud": 0.7051,
         "prop_malos": 0.3803,
         "malos_en_grupo": 89,
-        "malos_detectados": 0.7416,
-        "caida_vs_global": -0.0416,
+        "malos_detectados": 0.7528,
+        "caida_vs_global": -0.0395,
         "costo_extra": 0.0,
-        "p_valor": 0.3075,
+        "p_valor": 0.3261,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.2759
+        "buenos_rechazados": 0.3241
       },
       "other": {
         "casos": 12,
-        "exactitud": 0.5,
+        "exactitud": 0.5833,
         "prop_malos": 0.4167,
         "malos_en_grupo": 5,
-        "malos_detectados": 0.8,
-        "caida_vs_global": -0.1,
+        "malos_detectados": 1.0,
+        "caida_vs_global": -0.2867,
         "costo_extra": 0.0,
-        "p_valor": 0.6227,
+        "p_valor": 0.1529,
         "veredicto": "no concluyente",
         "buenos_rechazados": 0.7143
       },
       "radio/tv": {
         "casos": 280,
-        "exactitud": 0.7786,
+        "exactitud": 0.7643,
         "prop_malos": 0.2214,
         "malos_en_grupo": 62,
-        "malos_detectados": 0.6613,
-        "caida_vs_global": 0.0387,
-        "costo_extra": 12.0,
-        "p_valor": 0.4552,
+        "malos_detectados": 0.6774,
+        "caida_vs_global": 0.0359,
+        "costo_extra": 11.1333,
+        "p_valor": 0.4826,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.1881
+        "buenos_rechazados": 0.211
       },
       "repairs": {
         "casos": 22,
-        "exactitud": 0.7273,
+        "exactitud": 0.6818,
         "prop_malos": 0.3636,
         "malos_en_grupo": 8,
         "malos_detectados": 0.625,
-        "caida_vs_global": 0.075,
-        "costo_extra": 3.0,
-        "p_valor": 0.6389,
+        "caida_vs_global": 0.0883,
+        "costo_extra": 3.5333,
+        "p_valor": 0.5755,
         "veredicto": "no concluyente",
-        "buenos_rechazados": 0.2143
+        "buenos_rechazados": 0.2857
       },
       "retraining": {
         "casos": 9,
-        "exactitud": 0.8889,
+        "exactitud": 0.7778,
         "prop_malos": 0.1111,
         "malos_en_grupo": 1,
-        "malos_detectados": 1.0,
-        "caida_vs_global": -0.3,
-        "costo_extra": 0.0,
-        "p_valor": 0.512,
+        "malos_detectados": 0.0,
+        "caida_vs_global": 0.7133,
+        "costo_extra": 3.5667,
+        "p_valor": 0.1141,
         "veredicto": "no concluyente",
         "buenos_rechazados": 0.125
       },
       "used car": {
         "casos": 103,
-        "exactitud": 0.7961,
+        "exactitud": 0.8252,
         "prop_malos": 0.165,
         "malos_en_grupo": 17,
-        "malos_detectados": 0.5294,
-        "caida_vs_global": 0.1706,
-        "costo_extra": 14.5,
-        "p_valor": 0.114,
+        "malos_detectados": 0.5882,
+        "caida_vs_global": 0.1251,
+        "costo_extra": 10.6333,
+        "p_valor": 0.2402,
         "veredicto": "no concluyente",
-        "buenos_rechazados": 0.1512
+        "buenos_rechazados": 0.1279
       }
     },
     "duracion": {
       "13-24": {
         "casos": 411,
-        "exactitud": 0.6715,
+        "exactitud": 0.674,
         "prop_malos": 0.2968,
         "malos_en_grupo": 122,
-        "malos_detectados": 0.6557,
-        "caida_vs_global": 0.0443,
-        "costo_extra": 27.0,
-        "p_valor": 0.166,
+        "malos_detectados": 0.6803,
+        "caida_vs_global": 0.033,
+        "costo_extra": 20.1333,
+        "p_valor": 0.2953,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.3218
+        "buenos_rechazados": 0.3287
       },
       "25-36": {
         "casos": 143,
-        "exactitud": 0.6853,
+        "exactitud": 0.6643,
         "prop_malos": 0.3986,
         "malos_en_grupo": 57,
-        "malos_detectados": 0.7895,
-        "caida_vs_global": -0.0895,
+        "malos_detectados": 0.807,
+        "caida_vs_global": -0.0937,
         "costo_extra": 0.0,
-        "p_valor": 0.1014,
+        "p_valor": 0.0822,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.3837
+        "buenos_rechazados": 0.4302
       },
       ">36": {
         "casos": 87,
-        "exactitud": 0.6667,
+        "exactitud": 0.6437,
         "prop_malos": 0.5172,
         "malos_en_grupo": 45,
-        "malos_detectados": 0.9111,
-        "caida_vs_global": -0.2111,
+        "malos_detectados": 0.9333,
+        "caida_vs_global": -0.22,
         "costo_extra": 0.0,
-        "p_valor": 0.0008,
+        "p_valor": 0.0004,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.5952
+        "buenos_rechazados": 0.6667
       },
       "≤12 meses": {
         "casos": 359,
-        "exactitud": 0.7744,
+        "exactitud": 0.7688,
         "prop_malos": 0.2117,
         "malos_en_grupo": 76,
-        "malos_detectados": 0.5789,
-        "caida_vs_global": 0.1211,
-        "costo_extra": 46.0,
-        "p_valor": 0.0077,
+        "malos_detectados": 0.5658,
+        "caida_vs_global": 0.1475,
+        "costo_extra": 56.0667,
+        "p_valor": 0.001,
         "veredicto": "supera el umbral",
-        "buenos_rechazados": 0.1731
+        "buenos_rechazados": 0.1767
       }
     },
     "monto": {
       "Q1 bajo": {
         "casos": 250,
-        "exactitud": 0.764,
+        "exactitud": 0.748,
         "prop_malos": 0.308,
         "malos_en_grupo": 77,
         "malos_detectados": 0.7662,
-        "caida_vs_global": -0.0662,
+        "caida_vs_global": -0.0529,
         "costo_extra": 0.0,
-        "p_valor": 0.1413,
+        "p_valor": 0.2338,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.237
+        "buenos_rechazados": 0.2601
       },
       "Q2": {
         "casos": 250,
-        "exactitud": 0.752,
+        "exactitud": 0.72,
         "prop_malos": 0.248,
         "malos_en_grupo": 62,
-        "malos_detectados": 0.5806,
-        "caida_vs_global": 0.1194,
-        "costo_extra": 37.0,
-        "p_valor": 0.0213,
+        "malos_detectados": 0.5645,
+        "caida_vs_global": 0.1488,
+        "costo_extra": 46.1333,
+        "p_valor": 0.0036,
         "veredicto": "supera el umbral",
-        "buenos_rechazados": 0.1915
+        "buenos_rechazados": 0.2287
       },
       "Q3": {
         "casos": 250,
-        "exactitud": 0.68,
+        "exactitud": 0.708,
         "prop_malos": 0.224,
         "malos_en_grupo": 56,
-        "malos_detectados": 0.6607,
-        "caida_vs_global": 0.0393,
-        "costo_extra": 11.0,
-        "p_valor": 0.4769,
+        "malos_detectados": 0.6429,
+        "caida_vs_global": 0.0705,
+        "costo_extra": 19.7333,
+        "p_valor": 0.1959,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.3144
+        "buenos_rechazados": 0.2732
       },
       "Q4 alto": {
         "casos": 250,
-        "exactitud": 0.644,
+        "exactitud": 0.64,
         "prop_malos": 0.42,
         "malos_en_grupo": 105,
-        "malos_detectados": 0.7429,
-        "caida_vs_global": -0.0429,
+        "malos_detectados": 0.8,
+        "caida_vs_global": -0.0867,
         "costo_extra": 0.0,
-        "p_valor": 0.2346,
+        "p_valor": 0.0149,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.4276
+        "buenos_rechazados": 0.4759
       }
     },
     "cuenta_corriente": {
       "0<=X<200": {
         "casos": 269,
-        "exactitud": 0.5762,
+        "exactitud": 0.5613,
         "prop_malos": 0.3903,
         "malos_en_grupo": 105,
-        "malos_detectados": 0.781,
-        "caida_vs_global": -0.081,
+        "malos_detectados": 0.7905,
+        "caida_vs_global": -0.0771,
         "costo_extra": 0.0,
-        "p_valor": 0.0248,
+        "p_valor": 0.0301,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.5549
+        "buenos_rechazados": 0.5854
       },
       "<0": {
         "casos": 274,
-        "exactitud": 0.6314,
+        "exactitud": 0.6277,
         "prop_malos": 0.4927,
         "malos_en_grupo": 135,
-        "malos_detectados": 0.9111,
-        "caida_vs_global": -0.2111,
+        "malos_detectados": 0.8963,
+        "caida_vs_global": -0.183,
         "costo_extra": 0.0,
         "p_valor": 0.0,
         "veredicto": "dentro del umbral",
-        "buenos_rechazados": 0.6403
+        "buenos_rechazados": 0.6331
       },
       ">=200": {
         "casos": 63,
         "exactitud": 0.6508,
         "prop_malos": 0.2222,
         "malos_en_grupo": 14,
-        "malos_detectados": 0.0714,
-        "caida_vs_global": 0.6286,
-        "costo_extra": 44.0,
-        "p_valor": 0.0,
+        "malos_detectados": 0.2857,
+        "caida_vs_global": 0.4276,
+        "costo_extra": 29.9333,
+        "p_valor": 0.0003,
         "veredicto": "no concluyente",
-        "buenos_rechazados": 0.1837
+        "buenos_rechazados": 0.2449
       },
       "no checking": {
         "casos": 394,
-        "exactitud": 0.8655,
+        "exactitud": 0.8629,
         "prop_malos": 0.1168,
         "malos_en_grupo": 46,
-        "malos_detectados": 0.087,
-        "caida_vs_global": 0.613,
-        "costo_extra": 141.0,
+        "malos_detectados": 0.1304,
+        "caida_vs_global": 0.5829,
+        "costo_extra": 134.0667,
         "p_valor": 0.0,
         "veredicto": "supera el umbral",
-        "buenos_rechazados": 0.0316
+        "buenos_rechazados": 0.0402
       }
     }
+  },
+  "procedimiento_anidado": {
+    "exactitud_media": 0.704,
+    "exactitud_desv_ddof1": 0.0323,
+    "exactitud_pliegues": [
+      0.725,
+      0.675,
+      0.68,
+      0.75,
+      0.69
+    ],
+    "exactitud_entrenamiento": 0.781,
+    "brecha": 0.077,
+    "malos_detectados": 0.7133,
+    "malos_aprobados": 86,
+    "buenos_rechazados": 210,
+    "costo": 640,
+    "eleccion_por_pliegue": [
+      {
+        "learning_rate": 0.1,
+        "max_iter": 100,
+        "max_leaf_nodes": 4,
+        "min_samples_leaf": 20
+      },
+      {
+        "learning_rate": 0.1,
+        "max_iter": 100,
+        "max_leaf_nodes": 4,
+        "min_samples_leaf": 20
+      },
+      {
+        "learning_rate": 0.1,
+        "max_iter": 100,
+        "max_leaf_nodes": 4,
+        "min_samples_leaf": 20
+      },
+      {
+        "learning_rate": 0.03,
+        "max_iter": 300,
+        "max_leaf_nodes": 4,
+        "min_samples_leaf": 50
+      },
+      {
+        "learning_rate": 0.03,
+        "max_iter": 300,
+        "max_leaf_nodes": 4,
+        "min_samples_leaf": 50
+      }
+    ]
   }
 }

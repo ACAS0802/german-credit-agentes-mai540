@@ -1,5 +1,5 @@
 ,casos,exactitud,prop_malos,malos_en_grupo,malos_detectados,caida_vs_global,costo_extra,p_valor,veredicto,buenos_rechazados
-female div/dep/mar,310,0.6903,0.3516,109,0.6697,0.0303,16.5,0.3873,dentro del umbral,0.2985
-male div/sep,50,0.62,0.4,20,0.75,-0.05,0.0,0.6135,no concluyente,0.4667
-male mar/wid,92,0.7065,0.2717,25,0.72,-0.02,0.0,0.8197,no concluyente,0.2985
-male single,548,0.7299,0.2664,146,0.7123,-0.0123,0.0,0.65,dentro del umbral,0.2637
+female div/dep/mar,310,0.7065,0.3516,109,0.6881,0.0253,13.7667,0.4648,dentro del umbral,0.2836
+male div/sep,50,0.68,0.4,20,0.8,-0.0867,0.0,0.375,no concluyente,0.4
+male mar/wid,92,0.6304,0.2717,25,0.6,0.1133,14.1667,0.1906,no concluyente,0.3582
+male single,548,0.7172,0.2664,146,0.7397,-0.0264,0.0,0.325,dentro del umbral,0.291
