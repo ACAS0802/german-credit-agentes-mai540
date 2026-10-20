@@ -55,7 +55,9 @@ def evaluar_por_pliegues(estimador, X, y, cv):
         m = clone(estimador).fit(X.iloc[ent], y.iloc[ent])
         pred[pru] = m.predict(X.iloc[pru])
         acc.append(float((pred[pru] == y.iloc[pru].values).mean()))
-        acc_ent.append(float(m.score(X.iloc[ent], y.iloc[ent])))
+        # Exactitud de entrenamiento con predict y no con score(): GridSearchCV.score() falla cuando
+        # refit es una función (refit_por_regla), porque busca un puntaje con ese nombre.
+        acc_ent.append(float((m.predict(X.iloc[ent]) == y.iloc[ent].values).mean()))
         if hasattr(m, "elegido_"):
             eleccion.append(m.elegido_)
         elif hasattr(m, "best_params_"):
