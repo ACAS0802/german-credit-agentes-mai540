@@ -68,7 +68,8 @@ def modelo_elegido():
     sobre un «bad» pesa más al entrenar) y con capacidad reducida frente al de la 6.2: árboles de 8
     hojas en vez de 31 y tasa de aprendizaje 0.03 en vez de 0.1. Así deja de memorizar el
     entrenamiento (brecha 0.08 frente a 0.24). Los valores salen de resultados/capstone.json
-    («eleccion_final»); la prueba test_modelo_elegido_es_el_que_eligio_la_regla impide cambiarlos a mano.
+    («eleccion_final»); la prueba test_modelo_elegido_es_el_que_eligio_la_regla (tests/test_auditoria.py) impide
+    cambiarlos a mano.
     El modelo de la 6.2 era HistGradientBoostingClassifier(class_weight="balanced", random_state=42)."""
     return HistGradientBoostingClassifier(class_weight="balanced", random_state=42,
                                           learning_rate=0.03, max_iter=100,
