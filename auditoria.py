@@ -12,10 +12,10 @@ from sklearn.model_selection import cross_val_predict
 #
 # Por qué 0.10 y no otro valor:
 #   1. Costo. Por cada solicitante malo, «aprobar a todos» cuesta 5 y el modelo elegido cuesta
-#      costo/300 (unos 1.9 con costo ≈ 570), así que el modelo ahorra unas 3.1 unidades por malo.
+#      costo/300 (unos 2.2 con costo ≈ 650), así que el modelo ahorra unas 2.8 unidades por malo.
 #      Una caída de 0.10 le quita a ese grupo 5 × 0.10 = 0.5 unidades por malo: cerca de un sexto
-#      del beneficio. Toleramos perder hasta un sexto del beneficio en un grupo; con 0.20 el grupo
-#      perdería un tercio, y eso ya cambiaría la decisión de usar el modelo con ese grupo.
+#      del beneficio (0.5 / 2.8 ≈ 0.18). Toleramos perder hasta un sexto del beneficio en un grupo;
+#      con 0.20 perdería más de un tercio, y eso ya cambiaría la decisión de usarlo con ese grupo.
 #   2. Ruido. Con el mínimo de 30 malos por grupo y un recall cercano a 0.7, el error estándar del
 #      recall es √(0.7·0.3/30) ≈ 0.08. Un umbral menor que 0.10 marcaría como disparidad diferencias
 #      que el muestreo produce solo; por eso, además, cada caída lleva una prueba de proporciones.

@@ -1,0 +1,11 @@
+,casos,exactitud,prop_malos,malos_en_grupo,malos_detectados,caida_vs_global,costo_extra,p_valor,veredicto,buenos_rechazados
+business,97,0.5567,0.3505,34,0.6765,0.0235,4.0,0.7505,dentro del umbral,0.5079
+domestic appliance,12,0.75,0.3333,4,1.0,-0.3,0.0,0.1875,no concluyente,0.375
+education,50,0.64,0.44,22,0.6364,0.0636,7.0,0.4986,no concluyente,0.3571
+furniture/equipment,181,0.6298,0.3204,58,0.7414,-0.0414,0.0,0.4439,dentro del umbral,0.4228
+new car,234,0.7308,0.3803,89,0.7416,-0.0416,0.0,0.3075,dentro del umbral,0.2759
+other,12,0.5,0.4167,5,0.8,-0.1,0.0,0.6227,no concluyente,0.7143
+radio/tv,280,0.7786,0.2214,62,0.6613,0.0387,12.0,0.4552,dentro del umbral,0.1881
+repairs,22,0.7273,0.3636,8,0.625,0.075,3.0,0.6389,no concluyente,0.2143
+retraining,9,0.8889,0.1111,1,1.0,-0.3,0.0,0.512,no concluyente,0.125
+used car,103,0.7961,0.165,17,0.5294,0.1706,14.5,0.114,no concluyente,0.1512

@@ -62,7 +62,14 @@ def boosting_afinado(cols_cat, cv_interna, n_jobs=1):
 
 
 def modelo_elegido():
-    """Modelo recomendado en la Tarea 6.2: boosting con pesos de clase balanceados.
-    Aprobar un crédito malo cuesta más que rechazar uno bueno; con class_weight='balanced'
-    cada error sobre un «bad» pesa más al entrenar (ver optimizacion.py y el informe)."""
-    return HistGradientBoostingClassifier(class_weight="balanced", random_state=42)
+    """Modelo de la herramienta (Tarea 8.1): el que eligió la regla de regla.py en capstone.py.
+
+    Boosting con pesos de clase balanceados (aprobar un malo cuesta 5 veces más, así que cada error
+    sobre un «bad» pesa más al entrenar) y con capacidad reducida frente al de la 6.2: árboles de 8
+    hojas en vez de 31 y tasa de aprendizaje 0.03 en vez de 0.1. Así deja de memorizar el
+    entrenamiento (brecha 0.08 frente a 0.24). Los valores salen de resultados/capstone.json
+    («eleccion_final»); la prueba test_modelo_elegido_es_el_que_eligio_la_regla impide cambiarlos a mano.
+    El modelo de la 6.2 era HistGradientBoostingClassifier(class_weight="balanced", random_state=42)."""
+    return HistGradientBoostingClassifier(class_weight="balanced", random_state=42,
+                                          learning_rate=0.03, max_iter=100,
+                                          max_leaf_nodes=8, min_samples_leaf=20)

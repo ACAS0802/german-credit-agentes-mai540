@@ -1,0 +1,978 @@
+{
+  "configuracion": {
+    "cv_externa": "StratifiedKFold(5, shuffle=True, random_state=42) de datos.py",
+    "cv_interna": "StratifiedKFold(5, shuffle=True, random_state=1)",
+    "regla": "exactitud > 0.7 y, entre esos, menor costo (regla.py)",
+    "espacio_capacidad_boosting": {
+      "modelo__max_leaf_nodes": [
+        4,
+        8,
+        31
+      ],
+      "modelo__min_samples_leaf": [
+        20,
+        50
+      ],
+      "modelo__learning_rate": [
+        0.03,
+        0.1
+      ],
+      "modelo__max_iter": [
+        50,
+        100,
+        300
+      ]
+    },
+    "umbral_disparidad": "0.1 en malos detectados; concluyente si >= 30 malos",
+    "variables_excluidas_del_modelo": [
+      "age",
+      "personal_status",
+      "foreign_worker"
+    ],
+    "sklearn": "1.8.0"
+  },
+  "capacidad": {
+    "ganador_en_toda_la_muestra": {
+      "learning_rate": 0.03,
+      "max_iter": 300,
+      "max_leaf_nodes": 4,
+      "min_samples_leaf": 50
+    },
+    "nota": "Exploración para ver la capacidad (E3). Su puntaje es optimista; el número honesto es la anidada."
+  },
+  "comparacion": {
+    "Árbol afinado": {
+      "exactitud_media": 0.714,
+      "exactitud_desv_ddof1": 0.0286,
+      "exactitud_pliegues": [
+        0.745,
+        0.67,
+        0.705,
+        0.73,
+        0.72
+      ],
+      "exactitud_entrenamiento": 0.766,
+      "brecha": 0.052,
+      "malos_detectados": 0.3567,
+      "malos_aprobados": 193,
+      "buenos_rechazados": 93,
+      "costo": 1058,
+      "eleccion_por_pliegue": [
+        {
+          "max_depth": 10,
+          "min_samples_leaf": 20
+        },
+        {
+          "max_depth": 10,
+          "min_samples_leaf": 20
+        },
+        {
+          "max_depth": 5,
+          "min_samples_leaf": 20
+        },
+        {
+          "max_depth": 2,
+          "min_samples_leaf": 1
+        },
+        {
+          "max_depth": 3,
+          "min_samples_leaf": 10
+        }
+      ]
+    },
+    "Árbol afinado balanceado": {
+      "exactitud_media": 0.688,
+      "exactitud_desv_ddof1": 0.0261,
+      "exactitud_pliegues": [
+        0.71,
+        0.7,
+        0.665,
+        0.71,
+        0.655
+      ],
+      "exactitud_entrenamiento": 0.8898,
+      "brecha": 0.2017,
+      "malos_detectados": 0.5933,
+      "malos_aprobados": 122,
+      "buenos_rechazados": 190,
+      "costo": 800,
+      "eleccion_por_pliegue": [
+        {
+          "max_depth": 10,
+          "min_samples_leaf": 1
+        },
+        {
+          "max_depth": null,
+          "min_samples_leaf": 1
+        },
+        {
+          "max_depth": null,
+          "min_samples_leaf": 1
+        },
+        {
+          "max_depth": 4,
+          "min_samples_leaf": 10
+        },
+        {
+          "max_depth": 7,
+          "min_samples_leaf": 1
+        }
+      ]
+    },
+    "Random Forest": {
+      "exactitud_media": 0.764,
+      "exactitud_desv_ddof1": 0.0256,
+      "exactitud_pliegues": [
+        0.76,
+        0.755,
+        0.735,
+        0.765,
+        0.805
+      ],
+      "exactitud_entrenamiento": 1.0,
+      "brecha": 0.236,
+      "malos_detectados": 0.41,
+      "malos_aprobados": 177,
+      "buenos_rechazados": 59,
+      "costo": 944
+    },
+    "Random Forest balanceado": {
+      "exactitud_media": 0.757,
+      "exactitud_desv_ddof1": 0.016,
+      "exactitud_pliegues": [
+        0.77,
+        0.735,
+        0.765,
+        0.745,
+        0.77
+      ],
+      "exactitud_entrenamiento": 1.0,
+      "brecha": 0.243,
+      "malos_detectados": 0.3867,
+      "malos_aprobados": 184,
+      "buenos_rechazados": 59,
+      "costo": 979
+    },
+    "Boosting": {
+      "exactitud_media": 0.759,
+      "exactitud_desv_ddof1": 0.0143,
+      "exactitud_pliegues": [
+        0.755,
+        0.74,
+        0.78,
+        0.76,
+        0.76
+      ],
+      "exactitud_entrenamiento": 0.9995,
+      "brecha": 0.2405,
+      "malos_detectados": 0.49,
+      "malos_aprobados": 153,
+      "buenos_rechazados": 88,
+      "costo": 853
+    },
+    "Boosting balanceado (6.2)": {
+      "exactitud_media": 0.752,
+      "exactitud_desv_ddof1": 0.0307,
+      "exactitud_pliegues": [
+        0.775,
+        0.725,
+        0.715,
+        0.76,
+        0.785
+      ],
+      "exactitud_entrenamiento": 0.9963,
+      "brecha": 0.2443,
+      "malos_detectados": 0.6,
+      "malos_aprobados": 120,
+      "buenos_rechazados": 128,
+      "costo": 728
+    },
+    "Boosting balanceado afinado (8.1)": {
+      "exactitud_media": 0.704,
+      "exactitud_desv_ddof1": 0.0323,
+      "exactitud_pliegues": [
+        0.725,
+        0.675,
+        0.68,
+        0.75,
+        0.69
+      ],
+      "exactitud_entrenamiento": 0.781,
+      "brecha": 0.077,
+      "malos_detectados": 0.7133,
+      "malos_aprobados": 86,
+      "buenos_rechazados": 210,
+      "costo": 640,
+      "eleccion_por_pliegue": [
+        {
+          "learning_rate": 0.1,
+          "max_iter": 100,
+          "max_leaf_nodes": 4,
+          "min_samples_leaf": 20
+        },
+        {
+          "learning_rate": 0.1,
+          "max_iter": 100,
+          "max_leaf_nodes": 4,
+          "min_samples_leaf": 20
+        },
+        {
+          "learning_rate": 0.1,
+          "max_iter": 100,
+          "max_leaf_nodes": 4,
+          "min_samples_leaf": 20
+        },
+        {
+          "learning_rate": 0.03,
+          "max_iter": 300,
+          "max_leaf_nodes": 4,
+          "min_samples_leaf": 50
+        },
+        {
+          "learning_rate": 0.03,
+          "max_iter": 300,
+          "max_leaf_nodes": 4,
+          "min_samples_leaf": 50
+        }
+      ]
+    }
+  },
+  "seleccion_anidada": {
+    "exactitud_media": 0.711,
+    "exactitud_desv_ddof1": 0.0295,
+    "exactitud_pliegues": [
+      0.725,
+      0.675,
+      0.715,
+      0.75,
+      0.69
+    ],
+    "exactitud_entrenamiento": 0.824,
+    "brecha": 0.113,
+    "malos_detectados": 0.69,
+    "malos_aprobados": 93,
+    "buenos_rechazados": 196,
+    "costo": 661,
+    "eleccion_por_pliegue": [
+      "Boosting balanceado afinado (8.1)",
+      "Boosting balanceado afinado (8.1)",
+      "Boosting balanceado (6.2)",
+      "Boosting balanceado afinado (8.1)",
+      "Boosting balanceado afinado (8.1)"
+    ]
+  },
+  "robustez_semillas_cv": {
+    "0": {
+      "Árbol afinado": {
+        "exactitud_media": 0.71,
+        "malos_detectados": 0.3967,
+        "costo": 1014
+      },
+      "Árbol afinado balanceado": {
+        "exactitud_media": 0.673,
+        "malos_detectados": 0.5967,
+        "costo": 811
+      },
+      "Random Forest": {
+        "exactitud_media": 0.761,
+        "malos_detectados": 0.4,
+        "costo": 959
+      },
+      "Random Forest balanceado": {
+        "exactitud_media": 0.766,
+        "malos_detectados": 0.37,
+        "costo": 990
+      },
+      "Boosting": {
+        "exactitud_media": 0.766,
+        "malos_detectados": 0.5,
+        "costo": 834
+      },
+      "Boosting balanceado (6.2)": {
+        "exactitud_media": 0.756,
+        "malos_detectados": 0.59,
+        "costo": 736
+      },
+      "Boosting balanceado afinado (8.1)": {
+        "exactitud_media": 0.696,
+        "malos_detectados": 0.6933,
+        "costo": 672
+      },
+      "gana_por_regla": "Boosting balanceado (6.2)"
+    },
+    "1": {
+      "Árbol afinado": {
+        "exactitud_media": 0.71,
+        "malos_detectados": 0.4067,
+        "costo": 1002
+      },
+      "Árbol afinado balanceado": {
+        "exactitud_media": 0.681,
+        "malos_detectados": 0.56,
+        "costo": 847
+      },
+      "Random Forest": {
+        "exactitud_media": 0.771,
+        "malos_detectados": 0.4467,
+        "costo": 893
+      },
+      "Random Forest balanceado": {
+        "exactitud_media": 0.76,
+        "malos_detectados": 0.4033,
+        "costo": 956
+      },
+      "Boosting": {
+        "exactitud_media": 0.761,
+        "malos_detectados": 0.5067,
+        "costo": 831
+      },
+      "Boosting balanceado (6.2)": {
+        "exactitud_media": 0.757,
+        "malos_detectados": 0.5967,
+        "costo": 727
+      },
+      "Boosting balanceado afinado (8.1)": {
+        "exactitud_media": 0.713,
+        "malos_detectados": 0.7467,
+        "costo": 591
+      },
+      "gana_por_regla": "Boosting balanceado afinado (8.1)"
+    },
+    "2": {
+      "Árbol afinado": {
+        "exactitud_media": 0.715,
+        "malos_detectados": 0.36,
+        "costo": 1053
+      },
+      "Árbol afinado balanceado": {
+        "exactitud_media": 0.681,
+        "malos_detectados": 0.6233,
+        "costo": 771
+      },
+      "Random Forest": {
+        "exactitud_media": 0.751,
+        "malos_detectados": 0.4233,
+        "costo": 941
+      },
+      "Random Forest balanceado": {
+        "exactitud_media": 0.753,
+        "malos_detectados": 0.3933,
+        "costo": 975
+      },
+      "Boosting": {
+        "exactitud_media": 0.752,
+        "malos_detectados": 0.51,
+        "costo": 836
+      },
+      "Boosting balanceado (6.2)": {
+        "exactitud_media": 0.742,
+        "malos_detectados": 0.6,
+        "costo": 738
+      },
+      "Boosting balanceado afinado (8.1)": {
+        "exactitud_media": 0.712,
+        "malos_detectados": 0.7133,
+        "costo": 632
+      },
+      "gana_por_regla": "Boosting balanceado afinado (8.1)"
+    },
+    "3": {
+      "Árbol afinado": {
+        "exactitud_media": 0.729,
+        "malos_detectados": 0.3433,
+        "costo": 1059
+      },
+      "Árbol afinado balanceado": {
+        "exactitud_media": 0.663,
+        "malos_detectados": 0.6267,
+        "costo": 785
+      },
+      "Random Forest": {
+        "exactitud_media": 0.762,
+        "malos_detectados": 0.39,
+        "costo": 970
+      },
+      "Random Forest balanceado": {
+        "exactitud_media": 0.745,
+        "malos_detectados": 0.3467,
+        "costo": 1039
+      },
+      "Boosting": {
+        "exactitud_media": 0.759,
+        "malos_detectados": 0.4767,
+        "costo": 869
+      },
+      "Boosting balanceado (6.2)": {
+        "exactitud_media": 0.756,
+        "malos_detectados": 0.57,
+        "costo": 760
+      },
+      "Boosting balanceado afinado (8.1)": {
+        "exactitud_media": 0.695,
+        "malos_detectados": 0.6967,
+        "costo": 669
+      },
+      "gana_por_regla": "Boosting balanceado (6.2)"
+    },
+    "4": {
+      "Árbol afinado": {
+        "exactitud_media": 0.721,
+        "malos_detectados": 0.3967,
+        "costo": 1003
+      },
+      "Árbol afinado balanceado": {
+        "exactitud_media": 0.666,
+        "malos_detectados": 0.49,
+        "costo": 946
+      },
+      "Random Forest": {
+        "exactitud_media": 0.76,
+        "malos_detectados": 0.4267,
+        "costo": 928
+      },
+      "Random Forest balanceado": {
+        "exactitud_media": 0.76,
+        "malos_detectados": 0.3867,
+        "costo": 976
+      },
+      "Boosting": {
+        "exactitud_media": 0.766,
+        "malos_detectados": 0.5067,
+        "costo": 826
+      },
+      "Boosting balanceado (6.2)": {
+        "exactitud_media": 0.745,
+        "malos_detectados": 0.5833,
+        "costo": 755
+      },
+      "Boosting balanceado afinado (8.1)": {
+        "exactitud_media": 0.718,
+        "malos_detectados": 0.7233,
+        "costo": 614
+      },
+      "gana_por_regla": "Boosting balanceado afinado (8.1)"
+    }
+  },
+  "eleccion_final": {
+    "modelo": "Boosting balanceado afinado (8.1)",
+    "hiperparametros": {
+      "learning_rate": 0.03,
+      "max_iter": 100,
+      "max_leaf_nodes": 8,
+      "min_samples_leaf": 20
+    },
+    "tabla_de_la_regla": {
+      "Árbol afinado": {
+        "exactitud": 0.7140000000000001,
+        "costo_por_pliegue": 211.6
+      },
+      "Árbol afinado balanceado": {
+        "exactitud": 0.6880000000000001,
+        "costo_por_pliegue": 160.0
+      },
+      "Random Forest": {
+        "exactitud": 0.764,
+        "costo_por_pliegue": 188.8
+      },
+      "Random Forest balanceado": {
+        "exactitud": 0.757,
+        "costo_por_pliegue": 195.8
+      },
+      "Boosting": {
+        "exactitud": 0.759,
+        "costo_por_pliegue": 170.6
+      },
+      "Boosting balanceado (6.2)": {
+        "exactitud": 0.752,
+        "costo_por_pliegue": 145.6
+      },
+      "Boosting balanceado afinado (8.1)": {
+        "exactitud": 0.704,
+        "costo_por_pliegue": 128.0
+      }
+    }
+  },
+  "modelo_elegido_misma_cv": {
+    "exactitud_media": 0.71,
+    "exactitud_desv_ddof1": 0.0215,
+    "exactitud_pliegues": [
+      0.735,
+      0.7,
+      0.685,
+      0.73,
+      0.7
+    ],
+    "exactitud_entrenamiento": 0.7867,
+    "brecha": 0.0767,
+    "malos_detectados": 0.7,
+    "malos_aprobados": 90,
+    "buenos_rechazados": 200,
+    "costo": 650
+  },
+  "subgrupos": {
+    "edad_grupo": {
+      "19-24": {
+        "casos": 149,
+        "exactitud": 0.651,
+        "prop_malos": 0.4094,
+        "malos_en_grupo": 61,
+        "malos_detectados": 0.7377,
+        "caida_vs_global": -0.0377,
+        "costo_extra": 0.0,
+        "p_valor": 0.4715,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.4091
+      },
+      "25-34": {
+        "casos": 399,
+        "exactitud": 0.6842,
+        "prop_malos": 0.3283,
+        "malos_en_grupo": 131,
+        "malos_detectados": 0.7176,
+        "caida_vs_global": -0.0176,
+        "costo_extra": 0.0,
+        "p_valor": 0.5591,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.3321
+      },
+      "35-49": {
+        "casos": 327,
+        "exactitud": 0.7523,
+        "prop_malos": 0.2263,
+        "malos_en_grupo": 74,
+        "malos_detectados": 0.6486,
+        "caida_vs_global": 0.0514,
+        "costo_extra": 19.0,
+        "p_valor": 0.2667,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2174
+      },
+      "50+": {
+        "casos": 125,
+        "exactitud": 0.752,
+        "prop_malos": 0.272,
+        "malos_en_grupo": 34,
+        "malos_detectados": 0.6765,
+        "caida_vs_global": 0.0235,
+        "costo_extra": 4.0,
+        "p_valor": 0.7505,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2198
+      }
+    },
+    "sexo": {
+      "female": {
+        "casos": 310,
+        "exactitud": 0.6903,
+        "prop_malos": 0.3516,
+        "malos_en_grupo": 109,
+        "malos_detectados": 0.6697,
+        "caida_vs_global": 0.0303,
+        "costo_extra": 16.5,
+        "p_valor": 0.3873,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2985
+      },
+      "male": {
+        "casos": 690,
+        "exactitud": 0.7188,
+        "prop_malos": 0.2768,
+        "malos_en_grupo": 191,
+        "malos_detectados": 0.7173,
+        "caida_vs_global": -0.0173,
+        "costo_extra": 0.0,
+        "p_valor": 0.3873,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2806
+      }
+    },
+    "personal_status": {
+      "female div/dep/mar": {
+        "casos": 310,
+        "exactitud": 0.6903,
+        "prop_malos": 0.3516,
+        "malos_en_grupo": 109,
+        "malos_detectados": 0.6697,
+        "caida_vs_global": 0.0303,
+        "costo_extra": 16.5,
+        "p_valor": 0.3873,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2985
+      },
+      "male div/sep": {
+        "casos": 50,
+        "exactitud": 0.62,
+        "prop_malos": 0.4,
+        "malos_en_grupo": 20,
+        "malos_detectados": 0.75,
+        "caida_vs_global": -0.05,
+        "costo_extra": 0.0,
+        "p_valor": 0.6135,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.4667
+      },
+      "male mar/wid": {
+        "casos": 92,
+        "exactitud": 0.7065,
+        "prop_malos": 0.2717,
+        "malos_en_grupo": 25,
+        "malos_detectados": 0.72,
+        "caida_vs_global": -0.02,
+        "costo_extra": 0.0,
+        "p_valor": 0.8197,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.2985
+      },
+      "male single": {
+        "casos": 548,
+        "exactitud": 0.7299,
+        "prop_malos": 0.2664,
+        "malos_en_grupo": 146,
+        "malos_detectados": 0.7123,
+        "caida_vs_global": -0.0123,
+        "costo_extra": 0.0,
+        "p_valor": 0.65,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2637
+      }
+    },
+    "foreign_worker": {
+      "no": {
+        "casos": 37,
+        "exactitud": 0.8378,
+        "prop_malos": 0.1081,
+        "malos_en_grupo": 4,
+        "malos_detectados": 1.0,
+        "caida_vs_global": -0.3,
+        "costo_extra": 0.0,
+        "p_valor": 0.1875,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.1818
+      },
+      "yes": {
+        "casos": 963,
+        "exactitud": 0.7051,
+        "prop_malos": 0.3074,
+        "malos_en_grupo": 296,
+        "malos_detectados": 0.6959,
+        "caida_vs_global": 0.0041,
+        "costo_extra": 6.0,
+        "p_valor": 0.1875,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2909
+      }
+    },
+    "housing": {
+      "for free": {
+        "casos": 108,
+        "exactitud": 0.6667,
+        "prop_malos": 0.4074,
+        "malos_en_grupo": 44,
+        "malos_detectados": 0.7273,
+        "caida_vs_global": -0.0273,
+        "costo_extra": 0.0,
+        "p_valor": 0.6691,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.375
+      },
+      "own": {
+        "casos": 713,
+        "exactitud": 0.7195,
+        "prop_malos": 0.2609,
+        "malos_en_grupo": 186,
+        "malos_detectados": 0.6882,
+        "caida_vs_global": 0.0118,
+        "costo_extra": 11.0,
+        "p_valor": 0.568,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2694
+      },
+      "rent": {
+        "casos": 179,
+        "exactitud": 0.6983,
+        "prop_malos": 0.3911,
+        "malos_en_grupo": 70,
+        "malos_detectados": 0.7143,
+        "caida_vs_global": -0.0143,
+        "costo_extra": 0.0,
+        "p_valor": 0.7658,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.3119
+      }
+    }
+  },
+  "errores_por_categoria": {
+    "proposito": {
+      "business": {
+        "casos": 97,
+        "exactitud": 0.5567,
+        "prop_malos": 0.3505,
+        "malos_en_grupo": 34,
+        "malos_detectados": 0.6765,
+        "caida_vs_global": 0.0235,
+        "costo_extra": 4.0,
+        "p_valor": 0.7505,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.5079
+      },
+      "domestic appliance": {
+        "casos": 12,
+        "exactitud": 0.75,
+        "prop_malos": 0.3333,
+        "malos_en_grupo": 4,
+        "malos_detectados": 1.0,
+        "caida_vs_global": -0.3,
+        "costo_extra": 0.0,
+        "p_valor": 0.1875,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.375
+      },
+      "education": {
+        "casos": 50,
+        "exactitud": 0.64,
+        "prop_malos": 0.44,
+        "malos_en_grupo": 22,
+        "malos_detectados": 0.6364,
+        "caida_vs_global": 0.0636,
+        "costo_extra": 7.0,
+        "p_valor": 0.4986,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.3571
+      },
+      "furniture/equipment": {
+        "casos": 181,
+        "exactitud": 0.6298,
+        "prop_malos": 0.3204,
+        "malos_en_grupo": 58,
+        "malos_detectados": 0.7414,
+        "caida_vs_global": -0.0414,
+        "costo_extra": 0.0,
+        "p_valor": 0.4439,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.4228
+      },
+      "new car": {
+        "casos": 234,
+        "exactitud": 0.7308,
+        "prop_malos": 0.3803,
+        "malos_en_grupo": 89,
+        "malos_detectados": 0.7416,
+        "caida_vs_global": -0.0416,
+        "costo_extra": 0.0,
+        "p_valor": 0.3075,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.2759
+      },
+      "other": {
+        "casos": 12,
+        "exactitud": 0.5,
+        "prop_malos": 0.4167,
+        "malos_en_grupo": 5,
+        "malos_detectados": 0.8,
+        "caida_vs_global": -0.1,
+        "costo_extra": 0.0,
+        "p_valor": 0.6227,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.7143
+      },
+      "radio/tv": {
+        "casos": 280,
+        "exactitud": 0.7786,
+        "prop_malos": 0.2214,
+        "malos_en_grupo": 62,
+        "malos_detectados": 0.6613,
+        "caida_vs_global": 0.0387,
+        "costo_extra": 12.0,
+        "p_valor": 0.4552,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.1881
+      },
+      "repairs": {
+        "casos": 22,
+        "exactitud": 0.7273,
+        "prop_malos": 0.3636,
+        "malos_en_grupo": 8,
+        "malos_detectados": 0.625,
+        "caida_vs_global": 0.075,
+        "costo_extra": 3.0,
+        "p_valor": 0.6389,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.2143
+      },
+      "retraining": {
+        "casos": 9,
+        "exactitud": 0.8889,
+        "prop_malos": 0.1111,
+        "malos_en_grupo": 1,
+        "malos_detectados": 1.0,
+        "caida_vs_global": -0.3,
+        "costo_extra": 0.0,
+        "p_valor": 0.512,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.125
+      },
+      "used car": {
+        "casos": 103,
+        "exactitud": 0.7961,
+        "prop_malos": 0.165,
+        "malos_en_grupo": 17,
+        "malos_detectados": 0.5294,
+        "caida_vs_global": 0.1706,
+        "costo_extra": 14.5,
+        "p_valor": 0.114,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.1512
+      }
+    },
+    "duracion": {
+      "13-24": {
+        "casos": 411,
+        "exactitud": 0.6715,
+        "prop_malos": 0.2968,
+        "malos_en_grupo": 122,
+        "malos_detectados": 0.6557,
+        "caida_vs_global": 0.0443,
+        "costo_extra": 27.0,
+        "p_valor": 0.166,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.3218
+      },
+      "25-36": {
+        "casos": 143,
+        "exactitud": 0.6853,
+        "prop_malos": 0.3986,
+        "malos_en_grupo": 57,
+        "malos_detectados": 0.7895,
+        "caida_vs_global": -0.0895,
+        "costo_extra": 0.0,
+        "p_valor": 0.1014,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.3837
+      },
+      ">36": {
+        "casos": 87,
+        "exactitud": 0.6667,
+        "prop_malos": 0.5172,
+        "malos_en_grupo": 45,
+        "malos_detectados": 0.9111,
+        "caida_vs_global": -0.2111,
+        "costo_extra": 0.0,
+        "p_valor": 0.0008,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.5952
+      },
+      "≤12 meses": {
+        "casos": 359,
+        "exactitud": 0.7744,
+        "prop_malos": 0.2117,
+        "malos_en_grupo": 76,
+        "malos_detectados": 0.5789,
+        "caida_vs_global": 0.1211,
+        "costo_extra": 46.0,
+        "p_valor": 0.0077,
+        "veredicto": "supera el umbral",
+        "buenos_rechazados": 0.1731
+      }
+    },
+    "monto": {
+      "Q1 bajo": {
+        "casos": 250,
+        "exactitud": 0.764,
+        "prop_malos": 0.308,
+        "malos_en_grupo": 77,
+        "malos_detectados": 0.7662,
+        "caida_vs_global": -0.0662,
+        "costo_extra": 0.0,
+        "p_valor": 0.1413,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.237
+      },
+      "Q2": {
+        "casos": 250,
+        "exactitud": 0.752,
+        "prop_malos": 0.248,
+        "malos_en_grupo": 62,
+        "malos_detectados": 0.5806,
+        "caida_vs_global": 0.1194,
+        "costo_extra": 37.0,
+        "p_valor": 0.0213,
+        "veredicto": "supera el umbral",
+        "buenos_rechazados": 0.1915
+      },
+      "Q3": {
+        "casos": 250,
+        "exactitud": 0.68,
+        "prop_malos": 0.224,
+        "malos_en_grupo": 56,
+        "malos_detectados": 0.6607,
+        "caida_vs_global": 0.0393,
+        "costo_extra": 11.0,
+        "p_valor": 0.4769,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.3144
+      },
+      "Q4 alto": {
+        "casos": 250,
+        "exactitud": 0.644,
+        "prop_malos": 0.42,
+        "malos_en_grupo": 105,
+        "malos_detectados": 0.7429,
+        "caida_vs_global": -0.0429,
+        "costo_extra": 0.0,
+        "p_valor": 0.2346,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.4276
+      }
+    },
+    "cuenta_corriente": {
+      "0<=X<200": {
+        "casos": 269,
+        "exactitud": 0.5762,
+        "prop_malos": 0.3903,
+        "malos_en_grupo": 105,
+        "malos_detectados": 0.781,
+        "caida_vs_global": -0.081,
+        "costo_extra": 0.0,
+        "p_valor": 0.0248,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.5549
+      },
+      "<0": {
+        "casos": 274,
+        "exactitud": 0.6314,
+        "prop_malos": 0.4927,
+        "malos_en_grupo": 135,
+        "malos_detectados": 0.9111,
+        "caida_vs_global": -0.2111,
+        "costo_extra": 0.0,
+        "p_valor": 0.0,
+        "veredicto": "dentro del umbral",
+        "buenos_rechazados": 0.6403
+      },
+      ">=200": {
+        "casos": 63,
+        "exactitud": 0.6508,
+        "prop_malos": 0.2222,
+        "malos_en_grupo": 14,
+        "malos_detectados": 0.0714,
+        "caida_vs_global": 0.6286,
+        "costo_extra": 44.0,
+        "p_valor": 0.0,
+        "veredicto": "no concluyente",
+        "buenos_rechazados": 0.1837
+      },
+      "no checking": {
+        "casos": 394,
+        "exactitud": 0.8655,
+        "prop_malos": 0.1168,
+        "malos_en_grupo": 46,
+        "malos_detectados": 0.087,
+        "caida_vs_global": 0.613,
+        "costo_extra": 141.0,
+        "p_valor": 0.0,
+        "veredicto": "supera el umbral",
+        "buenos_rechazados": 0.0316
+      }
+    }
+  }
+}

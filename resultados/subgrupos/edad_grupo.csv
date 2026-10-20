@@ -1,0 +1,5 @@
+,casos,exactitud,prop_malos,malos_en_grupo,malos_detectados,caida_vs_global,costo_extra,p_valor,veredicto,buenos_rechazados
+19-24,149,0.651,0.4094,61,0.7377,-0.0377,0.0,0.4715,dentro del umbral,0.4091
+25-34,399,0.6842,0.3283,131,0.7176,-0.0176,0.0,0.5591,dentro del umbral,0.3321
+35-49,327,0.7523,0.2263,74,0.6486,0.0514,19.0,0.2667,dentro del umbral,0.2174
+50+,125,0.752,0.272,34,0.6765,0.0235,4.0,0.7505,dentro del umbral,0.2198

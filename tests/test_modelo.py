@@ -18,9 +18,11 @@ def test_supera_a_siempre_bueno(nombre):
 
 
 def test_resultado_estable():
-    # Umbral 0.05: el modelo elegido supera a «siempre bueno» por 0.052 (0.752 frente a 0.70).
-    # Con una desviación mayor que esa distancia, un pliegue típico podría quedar por debajo de la
-    # referencia y la ventaja dejaría de ser confiable.
+    # Umbral 0.05. Cada pliegue tiene 200 casos: con una exactitud cercana a 0.71, el puro muestreo
+    # produce una desviación de √(0.71·0.29/200) ≈ 0.032 entre pliegues. Una desviación mayor que
+    # 0.05 ya no se explica por el muestreo e indicaría un modelo inestable.
+    # (En la 6.2 el umbral se justificaba con la distancia a «siempre bueno», 0.052; con el modelo
+    # de la 8.1 esa distancia es 0.010 y el valor del modelo está en el costo, no en la exactitud.)
     _, desv = validar(crear_pipeline(modelo_elegido(), cols_cat, VARIABLES_SENSIBLES), X, y, cv)
     assert desv < 0.05, f"desviación {desv:.3f} ≥ 0.05"
 
