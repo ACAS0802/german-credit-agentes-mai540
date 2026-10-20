@@ -66,12 +66,12 @@ Las siete filas completas, con el árbol balanceado y las versiones balanceadas,
 
 ## Instalación
 
-Requiere Python 3.10 o superior y Git.
+Requiere Python 3.11 o superior (probado con 3.12 y 3.13) y Git. `requirements.txt` fija scikit-learn 1.8.0: con otra versión las cifras pueden cambiar en el tercer decimal (con 1.9.1 la probabilidad del ejemplo sale 0.788 en lugar de 0.792).
 
 ```bash
 git clone https://github.com/ACAS0802/german-credit-agentes-mai540.git
 cd german-credit-agentes-mai540
-python3 -m venv .venv
+python3.12 -m venv .venv       # o python3.11 / python3.13
 source .venv/bin/activate        # en Windows: .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 python instalar_hook.py          # opcional: ejecuta las pruebas antes de cada commit
