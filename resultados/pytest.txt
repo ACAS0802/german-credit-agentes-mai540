@@ -3,19 +3,26 @@ platform linux -- Python 3.13.16, pytest-9.1.1, pluggy-1.7.0 -- /usr/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/claude/acas0802/german-credit-agentes-mai540
 plugins: platformdirs-4.12.3, anyio-4.15.1
-collecting ... collected 12 items
+collecting ... collected 19 items
 
-tests/test_auditoria.py::test_regla_elige_el_menor_costo_entre_los_que_superan_070 PASSED [  8%]
-tests/test_auditoria.py::test_modelo_elegido_es_el_que_eligio_la_regla PASSED [ 16%]
-tests/test_auditoria.py::test_grupo_pequeno_es_no_concluyente_aunque_caiga_mucho PASSED [ 25%]
-tests/test_auditoria.py::test_auditoria_detecta_una_disparidad_real PASSED [ 33%]
-tests/test_modelo.py::test_supera_a_siempre_bueno[\xc1rbol] XFAIL (e...) [ 41%]
-tests/test_modelo.py::test_supera_a_siempre_bueno[Random Forest] PASSED  [ 50%]
-tests/test_modelo.py::test_supera_a_siempre_bueno[Boosting] PASSED       [ 58%]
-tests/test_modelo.py::test_resultado_estable PASSED                      [ 66%]
-tests/test_modelo.py::test_codificacion_dentro_del_pipeline PASSED       [ 75%]
-tests/test_modelo.py::test_elegido_supera_a_siempre_bueno PASSED         [ 83%]
-tests/test_modelo.py::test_elegido_detecta_al_menos_la_mitad_de_los_malos PASSED [ 91%]
+tests/test_auditoria.py::test_regla_elige_el_menor_costo_entre_los_que_superan_070 PASSED [  5%]
+tests/test_auditoria.py::test_modelo_elegido_es_el_que_eligio_la_regla PASSED [ 10%]
+tests/test_auditoria.py::test_grupo_pequeno_es_no_concluyente_aunque_caiga_mucho PASSED [ 15%]
+tests/test_auditoria.py::test_auditoria_detecta_una_disparidad_real PASSED [ 21%]
+tests/test_herramienta.py::test_devuelve_probabilidad_valida_y_limitaciones PASSED [ 26%]
+tests/test_herramienta.py::test_rechaza_entrada_invalida[cambio0-duration] PASSED [ 31%]
+tests/test_herramienta.py::test_rechaza_entrada_invalida[cambio1-credit_amount] PASSED [ 36%]
+tests/test_herramienta.py::test_rechaza_entrada_invalida[cambio2-purpose] PASSED [ 42%]
+tests/test_herramienta.py::test_rechaza_entrada_invalida[cambio3-n\xfamero] PASSED [ 47%]
+tests/test_herramienta.py::test_rechaza_solicitud_incompleta PASSED      [ 52%]
+tests/test_herramienta.py::test_edad_sexo_y_origen_no_cambian_la_respuesta PASSED [ 57%]
+tests/test_modelo.py::test_supera_a_siempre_bueno[\xc1rbol] XFAIL (e...) [ 63%]
+tests/test_modelo.py::test_supera_a_siempre_bueno[Random Forest] PASSED  [ 68%]
+tests/test_modelo.py::test_supera_a_siempre_bueno[Boosting] PASSED       [ 73%]
+tests/test_modelo.py::test_resultado_estable PASSED                      [ 78%]
+tests/test_modelo.py::test_codificacion_dentro_del_pipeline PASSED       [ 84%]
+tests/test_modelo.py::test_elegido_supera_a_siempre_bueno PASSED         [ 89%]
+tests/test_modelo.py::test_elegido_detecta_al_menos_la_mitad_de_los_malos PASSED [ 94%]
 tests/test_modelo.py::test_variables_sensibles_no_deciden PASSED         [100%]
 
-======================== 11 passed, 1 xfailed in 4.49s =========================
+======================== 18 passed, 1 xfailed in 4.54s =========================
