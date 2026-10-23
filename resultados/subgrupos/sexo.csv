@@ -1,0 +1,3 @@
+,casos,exactitud,prop_malos,malos_en_grupo,malos_detectados,caida_vs_global,costo_extra,p_valor,veredicto,buenos_rechazados
+female,310,0.7065,0.3516,109,0.6881,0.0253,13.7667,0.4648,dentro del umbral,0.2836
+male,690,0.7029,0.2768,191,0.7277,-0.0144,0.0,0.4648,dentro del umbral,0.3066

@@ -35,8 +35,42 @@ def tres_modelos():
     }
 
 
+# Tarea 8.1 · Capacidad del boosting (hallazgo H2 / E3). En la 6.2 el boosting quedó con sus valores por
+# omisión y su curva mostraba 0.996 en entrenamiento frente a 0.752 en validación: casi memorizaba.
+# Se exploran los hiperparámetros que controlan cuánto puede aprender:
+#   max_leaf_nodes   hojas por árbol (31 por omisión): cuántas reglas puede combinar cada árbol
+#   min_samples_leaf casos mínimos por hoja (20 por omisión): evita reglas basadas en pocos casos
+#   learning_rate    cuánto corrige cada árbol nuevo (0.1 por omisión)
+#   max_iter         número de árboles (100 por omisión)
+PARAM_GRID_BOOSTING = {
+    "modelo__max_leaf_nodes": [4, 8, 31],
+    "modelo__min_samples_leaf": [20, 50],
+    "modelo__learning_rate": [0.03, 0.1],
+    "modelo__max_iter": [50, 100, 300],
+}
+
+
+def boosting_afinado(cols_cat, cv_interna, n_jobs=1):
+    """Boosting balanceado cuya capacidad se elige con la regla del proyecto (regla.py) dentro de
+    cv_interna. Reporta entrenamiento y validación (return_train_score) para ver dónde memoriza."""
+    from sklearn.model_selection import GridSearchCV
+    from regla import METRICAS, refit_por_regla
+    base = crear_pipeline(HistGradientBoostingClassifier(class_weight="balanced", random_state=42),
+                          cols_cat, VARIABLES_SENSIBLES)
+    return GridSearchCV(base, PARAM_GRID_BOOSTING, cv=cv_interna, scoring=METRICAS,
+                        refit=refit_por_regla, return_train_score=True, n_jobs=n_jobs)
+
+
 def modelo_elegido():
-    """Modelo recomendado en la Tarea 6.2: boosting con pesos de clase balanceados.
-    Aprobar un crédito malo cuesta más que rechazar uno bueno; con class_weight='balanced'
-    cada error sobre un «bad» pesa más al entrenar (ver optimizacion.py y el informe)."""
-    return HistGradientBoostingClassifier(class_weight="balanced", random_state=42)
+    """Modelo de la herramienta (Tarea 8.1): el que eligió la regla de regla.py en capstone.py.
+
+    Boosting con pesos de clase balanceados (aprobar un malo cuesta 5 veces más, así que cada error
+    sobre un «bad» pesa más al entrenar) y con capacidad reducida frente al de la 6.2: árboles de 8
+    hojas en vez de 31 y tasa de aprendizaje 0.03 en vez de 0.1. Así deja de memorizar el
+    entrenamiento (brecha 0.08 frente a 0.24). Los valores salen de resultados/capstone.json
+    («eleccion_final»); la prueba test_modelo_elegido_es_el_que_eligio_la_regla (tests/test_auditoria.py) impide
+    cambiarlos a mano.
+    El modelo de la 6.2 era HistGradientBoostingClassifier(class_weight="balanced", random_state=42)."""
+    return HistGradientBoostingClassifier(class_weight="balanced", random_state=42,
+                                          learning_rate=0.03, max_iter=100,
+                                          max_leaf_nodes=8, min_samples_leaf=20)

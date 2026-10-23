@@ -1,0 +1,5 @@
+,casos,exactitud,prop_malos,malos_en_grupo,malos_detectados,caida_vs_global,costo_extra,p_valor,veredicto,buenos_rechazados
+Q1 bajo,250,0.748,0.308,77,0.7662,-0.0529,0.0,0.2338,dentro del umbral,0.2601
+Q2,250,0.72,0.248,62,0.5645,0.1488,46.1333,0.0036,supera el umbral,0.2287
+Q3,250,0.708,0.224,56,0.6429,0.0705,19.7333,0.1959,dentro del umbral,0.2732
+Q4 alto,250,0.64,0.42,105,0.8,-0.0867,0.0,0.0149,dentro del umbral,0.4759
