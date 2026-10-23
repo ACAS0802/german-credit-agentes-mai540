@@ -79,6 +79,20 @@ python instalar_hook.py          # opcional: ejecuta las pruebas antes de cada c
 
 ## Cómo ejecutar
 
+**Opción 1 · Sin instalar nada (Google Colab).** Abre el cuaderno, pulsa *Entorno de ejecución → Ejecutar todo* y, al final, abre el enlace `https://….gradio.live` que aparece:
+
+[Abrir demo_colab.ipynb en Colab](https://colab.research.google.com/github/ACAS0802/german-credit-agentes-mai540/blob/main/demo_colab.ipynb)
+
+**Opción 2 · App en tu computador (Gradio).** Con el entorno instalado:
+
+```bash
+python app_gradio.py
+```
+
+Abre la dirección que aparece (`http://127.0.0.1:7860`). Verás las limitaciones arriba, 17 campos en español y dos ejemplos (riesgo alto y riesgo bajo). Con `python app_gradio.py --share` se crea además un enlace público temporal.
+
+**Opción 3 · Línea de comandos.**
+
 **Evaluar una solicitud** (la herramienta):
 
 ```bash
@@ -116,7 +130,7 @@ python capstone.py --auditoria   # solo la auditoría por subgrupo y categoría,
 pytest -v
 ```
 
-Se espera `18 passed, 1 xfailed` en unos 5 segundos (el árbol sin límite de profundidad no supera la línea base; es la lección de la Tarea 6.1 y está marcado como fallo esperado). La salida guardada está en `resultados/pytest.txt`, y el registro de las tres comprobaciones antes de entregar (pruebas, hook y auditoría) en `resultados/comprobaciones.md`.
+Se espera `20 passed, 1 xfailed` en unos 10 segundos (el árbol sin límite de profundidad no supera la línea base; es la lección de la Tarea 6.1 y está marcado como fallo esperado). La salida guardada está en `resultados/pytest.txt`, y el registro de las tres comprobaciones antes de entregar (pruebas, hook y auditoría) en `resultados/comprobaciones.md`.
 
 | Prueba | Qué comprueba |
 |---|---|
@@ -130,6 +144,8 @@ Se espera `18 passed, 1 xfailed` en unos 5 segundos (el árbol sin límite de pr
 | `test_rechaza_entrada_invalida`, `test_rechaza_solicitud_incompleta` | La herramienta rechaza duraciones negativas, montos en cero, categorías inexistentes, texto en lugar de números y solicitudes incompletas |
 | `test_devuelve_probabilidad_valida_y_limitaciones` | La respuesta trae una probabilidad entre 0 y 1 y el texto de limitaciones |
 | `test_grupo_pequeno_es_no_concluyente_aunque_caiga_mucho`, `test_auditoria_detecta_una_disparidad_real` | La auditoría no aprueba grupos pequeños y sigue detectando una disparidad real |
+| `test_interfaz_muestra_error_en_vez_de_fallar` | La app explica en pantalla una entrada inválida en lugar de mostrar un error de Python |
+| `test_degradacion_la_exactitud_esconde_la_caida_de_malos_detectados` | La lección de la simulación de degradación sigue siendo cierta (ver *Limitaciones*) |
 
 ## Limitaciones
 
@@ -138,6 +154,14 @@ Se espera `18 passed, 1 xfailed` en unos 5 segundos (el árbol sin límite de pr
 - **Excluir las variables sensibles no las vuelve invisibles.** Las demás variables permiten adivinar en parte la edad, el sexo y el origen (AUC entre 0.69 y 0.81). El modelo no las usa directamente, pero sí puede usar sus huellas.
 - **Su ventaja en exactitud sobre «siempre bueno» es mínima** (0.704 frente a 0.700). Lo que lo justifica es el costo.
 - **Qué datos cambiarían con el tiempo:** la duración típica de los créditos, los montos, el perfil de quienes piden crédito y el uso de cuentas corrientes. Si cambian, los aciertos bajan sin que nada avise.
+- **Simulación de degradación** (`python degradacion.py`, 20 repartos, `resultados/degradacion.json`):
+
+  | Cambio del «mundo» | Exactitud | Malos detectados | Costo por solicitud |
+  |---|---|---|---|
+  | Entrenado con créditos ≤ 24 meses, usado con > 24 meses | 0.69 → 0.66 | 0.66 → 0.81 | 0.66 → 0.69 (aprobar a todos: 1.29 → 2.22) |
+  | Entrenado con quienes tienen cuenta corriente, usado con quienes no | 0.66 → **0.70** | 0.62 → **0.42** | 0.97 → 0.57 (aprobar a todos: 2.10 → 0.58) |
+
+  En el segundo caso **la exactitud sube mientras los malos detectados caen 20 puntos**: quien vigile solo la exactitud no verá la degradación. Por eso el seguimiento debe medir los malos detectados, no la exactitud.
 - **Cómo se notaría:** midiendo cada mes los malos detectados y el costo con créditos nuevos cuyo resultado ya se conoce. Hoy detecta 0.71 de los malos y cuesta 0.64 por solicitud. Si los malos detectados bajan de 0.60 o el costo por solicitud sube de 0.73 (lo que costaba el modelo de la 6.2), hay que revisarlo.
 - **Cuándo revisar o reentrenar:** cada vez que cambie el producto o la población que pide crédito, y al menos una vez al año.
 
@@ -151,6 +175,9 @@ Se espera `18 passed, 1 xfailed` en unos 5 segundos (el árbol sin límite de pr
 ├── datos.py, modelos.py, regla.py, seleccion.py, auditoria.py, busqueda.py
 ├── capstone.py               flujo final del capstone (Tarea 8.1)
 ├── herramienta.py            la herramienta: evalúa una solicitud
+├── app_gradio.py             la herramienta con interfaz web (Tarea 8.2)
+├── demo_colab.ipynb          la app desde Colab, sin instalar nada
+├── degradacion.py            simulación de degradación
 ├── hooks/pre-commit, instalar_hook.py   pruebas antes de cada commit (Módulo 7)
 ├── tests/                    pruebas automáticas (pytest)
 ├── resultados/               capstone.json, capacidad, subgrupos, errores, pytest.txt

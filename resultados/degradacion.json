@@ -1,0 +1,76 @@
+[
+  {
+    "cambio": "duración: entrenado con ≤ 24 meses, usado con > 24",
+    "casos_antes": 770,
+    "casos_despues": 230,
+    "prop_malos_antes": 0.257,
+    "prop_malos_despues": 0.443,
+    "costo_aprobar_a_todos_antes": 1.29,
+    "costo_aprobar_a_todos_despues": 2.22,
+    "mismo_mundo": {
+      "exactitud": {
+        "media": 0.691,
+        "desv": 0.025
+      },
+      "malos_detectados": {
+        "media": 0.662,
+        "desv": 0.064
+      },
+      "costo_por_solicitud": {
+        "media": 0.659,
+        "desv": 0.08
+      }
+    },
+    "mundo_cambiado": {
+      "exactitud": {
+        "media": 0.66,
+        "desv": 0.027
+      },
+      "malos_detectados": {
+        "media": 0.805,
+        "desv": 0.053
+      },
+      "costo_por_solicitud": {
+        "media": 0.686,
+        "desv": 0.099
+      }
+    }
+  },
+  {
+    "cambio": "cuenta corriente: entrenado con quienes tienen cuenta, usado con quienes no",
+    "casos_antes": 606,
+    "casos_despues": 394,
+    "prop_malos_antes": 0.419,
+    "prop_malos_despues": 0.117,
+    "costo_aprobar_a_todos_antes": 2.1,
+    "costo_aprobar_a_todos_despues": 0.58,
+    "mismo_mundo": {
+      "exactitud": {
+        "media": 0.663,
+        "desv": 0.032
+      },
+      "malos_detectados": {
+        "media": 0.623,
+        "desv": 0.052
+      },
+      "costo_por_solicitud": {
+        "media": 0.972,
+        "desv": 0.11
+      }
+    },
+    "mundo_cambiado": {
+      "exactitud": {
+        "media": 0.696,
+        "desv": 0.025
+      },
+      "malos_detectados": {
+        "media": 0.424,
+        "desv": 0.065
+      },
+      "costo_por_solicitud": {
+        "media": 0.573,
+        "desv": 0.032
+      }
+    }
+  }
+]

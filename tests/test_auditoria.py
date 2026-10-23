@@ -42,3 +42,17 @@ def test_auditoria_detecta_una_disparidad_real():
     pred = [1] * 100 + [1] * 25 + [0] * 25
     tabla = auditar_grupos(y, pred, ["a"] * 100 + ["b"] * 50)
     assert tabla.loc["b", "veredicto"] == "supera el umbral"
+
+
+def test_degradacion_la_exactitud_esconde_la_caida_de_malos_detectados():
+    # Lección de degradacion.py: si los solicitantes dejan de tener cuenta corriente, la exactitud no
+    # avisa, pero los malos detectados caen más de 0.10. Si esto deja de cumplirse, hay que revisar
+    # las limitaciones del README.
+    import numpy as np
+    from datos import cargar_datos
+    from degradacion import simular
+    X, y, cols_cat, _ = cargar_datos()
+    r = simular(X, y, cols_cat, X["checking_status"] != "no checking", "prueba", repartos=5)
+    antes, despues = r["mismo_mundo"], r["mundo_cambiado"]
+    assert despues["exactitud"]["media"] >= antes["exactitud"]["media"] - 0.02
+    assert antes["malos_detectados"]["media"] - despues["malos_detectados"]["media"] > 0.10

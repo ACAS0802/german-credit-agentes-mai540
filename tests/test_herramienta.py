@@ -39,3 +39,14 @@ def test_edad_sexo_y_origen_no_cambian_la_respuesta():
     a = evaluar_solicitud({**EJEMPLO, "age": 22, "personal_status": "female div/dep/mar", "foreign_worker": "yes"})
     b = evaluar_solicitud({**EJEMPLO, "age": 67, "personal_status": "male single", "foreign_worker": "no"})
     assert a["probabilidad_malo"] == b["probabilidad_malo"]
+
+
+# --- La interfaz (app_gradio.py) ------------------------------------------------------------------
+
+def test_interfaz_muestra_error_en_vez_de_fallar():
+    # Quien usa la app no debe ver un error de Python: una duración de 0 se explica en pantalla.
+    import app_gradio as app
+    valores = [EJEMPLO[c] for c in app.CAMPOS]
+    valores[app.CAMPOS.index("duration")] = 0
+    assert "no válida" in app.evaluar(*valores)
+    assert "Riesgo alto" in app.evaluar(*[EJEMPLO[c] for c in app.CAMPOS])
